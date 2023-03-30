@@ -1,16 +1,16 @@
-(function($){
+(function ($) {
 
     "use strict";
 
     $(".inputtags").tagsinput('items');
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#example1').DataTable();
     });
 
     $('.icp_demo').iconpicker();
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.snote').summernote();
     });
 
@@ -22,5 +22,6 @@
             down: 'fa fa-angle-down'
         }
     });
+
 
 })(jQuery);

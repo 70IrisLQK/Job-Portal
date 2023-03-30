@@ -16,5 +16,4 @@
 <script src="{{ asset('backend/js/iziToast.min.js') }}"></script>
 <script src="{{ asset('backend/js/fontawesome-iconpicker.js') }}"></script>
 <script src="{{ asset('backend/js/bootstrap4-toggle.min.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="{{ asset('backend/js/toastr.min.js') }}"></script>

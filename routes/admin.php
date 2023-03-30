@@ -12,7 +12,9 @@ Route::prefix('admin')->group(function () {
     Route::get('reset-password/{token}/{email}', [AdminController::class, 'adminResetPassword']);
     Route::post('reset-password-submit', [AdminController::class, 'adminResetPasswordSubmit'])->name('admin.reset-password-submit');
 
-    // Route::middleware()->group(function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    // });
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('profile/{id}', [AdminController::class, 'showProfile'])->name('admin.profile');
+        Route::put('update-profile/{id}', [AdminController::class, 'updateProfile'])->name('admin.update-profile');
+    });
 });

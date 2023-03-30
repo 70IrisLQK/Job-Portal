@@ -1,21 +1,22 @@
 <script>
-    // success message popup notification
-    @if (Session::has('success'))
-        toastr.success("{{ Session::get('success') }}");
-    @endif
+    @if (Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}"
+        switch (type) {
+            case 'info':
+                toastr.info(" {{ Session::get('message') }} ");
+                break;
 
-    // info message popup notification
-    @if (Session::has('info'))
-        toastr.info("{{ Session::get('info') }}");
-    @endif
+            case 'success':
+                toastr.success(" {{ Session::get('message') }} ");
+                break;
 
-    // warning message popup notification
-    @if (Session::has('warning'))
-        toastr.warning("{{ Session::get('warning') }}");
-    @endif
+            case 'warning':
+                toastr.warning(" {{ Session::get('message') }} ");
+                break;
 
-    // error message popup notification
-    @if (Session::has('error'))
-        toastr.error("{{ Session::get('error') }}");
+            case 'error':
+                toastr.error(" {{ Session::get('message') }} ");
+                break;
+        }
     @endif
 </script>

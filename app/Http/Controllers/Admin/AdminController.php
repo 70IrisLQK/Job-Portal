@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 class AdminController extends Controller
 {
+    public const PUBLIC_PATH = 'upload/avatars/';
+
     public function index()
     {
         return view('admin.pages.admin_dashboard');
@@ -38,7 +42,11 @@ class AdminController extends Controller
         ];
 
         if (Auth::guard('admin')->attempt($credential)) {
-            return redirect()->route('admin.dashboard');
+            $notification = array(
+                'message' => 'Login Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('admin.dashboard')->with($notification);
         } else {
             return redirect()->back()->with('error_message', 'Invalid email or password.');
         }
@@ -47,7 +55,13 @@ class AdminController extends Controller
     public function adminLogout()
     {
         Auth::guard('admin')->logout();
-        return view('admin.pages.admin_login');
+
+        $notification = array(
+            'message' => 'Logout Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.login')->with($notification);
     }
 
     public function adminForgetPassword()
@@ -84,9 +98,11 @@ class AdminController extends Controller
 
         Mail::to($email)->send(new WebsiteEmail($subject, $message));
 
-        session()->put('success', 'Send Link Reset Password Successfully.');
-
-        return redirect()->route('admin.login');
+        $notification = array(
+            'message' => 'Send Link Reset Password Successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.login')->with($notification);
     }
 
     public function adminResetPassword($token, $email)
@@ -122,11 +138,53 @@ class AdminController extends Controller
         $getAdmin->password = Hash::make($request->password);
         $getAdmin->save();
 
-        $notifications = [
+        $notification = array(
             'message' => 'Reset Password Successfully.',
             'alert-type' => 'success'
-        ];
+        );
 
-        return redirect()->route('admin.login')->with($notifications);
+        return redirect()->route('admin.login')->with($notification);
+    }
+
+    public function showProfile($id)
+    {
+        $getAdmin = Admin::find($id);
+        return view('admin.pages.admin_profile', compact('getAdmin'));
+    }
+
+    public function updateProfile($id, Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'max:255', 'min:6'],
+            'email' => ['required',  'email', 'max:255', 'min:6',],
+            'new_password' => ['required', 'max:255', 'min:6'],
+            'confirm_password' => ['required', 'max:255', 'min:6', 'same:new_password'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:1000']
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $pathName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $path = public_path(AdminController::PUBLIC_PATH);
+            Image::make($image)->resize(600, 600)->save($path . $pathName);
+        }
+        $getAdmin = Admin::findOrFail($id);
+        $imageExist = $getAdmin->avatar;
+
+        if (file_exists($path  . $imageExist)) {
+            unlink($path . $imageExist);
+        }
+
+        $getAdmin->name = $request->name;
+        $getAdmin->email = $request->email;
+        $getAdmin->password = Hash::make($request->new_password);
+        $getAdmin->avatar = $pathName;
+        $getAdmin->save();
+
+        $notification = array(
+            'message' => 'Edit Profile Successfully.',
+            'alert-type' => 'success'
+        );
+        return view('admin.pages.admin_profile', compact('getAdmin', 'notification'));
     }
 }

@@ -17,4 +17,4 @@
 <link rel="stylesheet" href="{{ asset('backend/css/components.css') }}">
 <link rel="stylesheet" href="{{ asset('backend/css/spacing.css') }}">
 <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" href="{{ asset('backend/css/toastr.min.css') }}">
