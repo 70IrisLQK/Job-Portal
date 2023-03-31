@@ -82,8 +82,6 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $getPostById = Post::find($id);
-        return view('frontend.pages.post', compact('getPostById'));
     }
 
     /**

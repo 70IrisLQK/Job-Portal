@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             WhyChooseSeeder::class,
             TestimonialSeeder::class,
             PostSeeder::class,
+            PageFAQSeeder::class,
+            PageBlogSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

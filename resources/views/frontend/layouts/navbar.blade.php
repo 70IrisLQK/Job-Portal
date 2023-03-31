@@ -29,10 +29,10 @@
                             <a href="pricing.html" class="nav-link">Pricing</a>
                         </li>
                         <li class="nav-item">
-                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="{{ url('faqs') }}" class="nav-link">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a href="blog.html" class="nav-link">Blog</a>
+                            <a href="{{ url('blogs') }}" class="nav-link">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a href="contact.html" class="nav-link">Contact</a>

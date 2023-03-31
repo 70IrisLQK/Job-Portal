@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\PageBlogController;
+use App\Http\Controllers\admin\PageFAQController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\WhyChooseController;
@@ -42,6 +45,14 @@ Route::prefix('admin')->group(function () {
         Route::get('homepage/last-news', [HomePageController::class, 'lastNews'])->name('admin.last-news');
         Route::put('last-news/{id}', [HomePageController::class, 'updateLastNews'])->name('admin.update-last-news');
 
+        //Page Setting
+        //Page FAQs
+        Route::get('page/faqs', [PageFAQController::class, 'pageFAQ'])->name('admin.page-faqs');
+        Route::put('page/faqs/{id}', [PageFAQController::class, 'updatePageFAQ'])->name('admin.update-page-faqs');
+        //Page Blogs
+        Route::get('page/blogs', [PageBlogController::class, 'pageBlog'])->name('admin.page-blogs');
+        Route::put('page/blogs/{id}', [PageBlogController::class, 'updatePageBlog'])->name('admin.update-page-blogs');
+
         // Category route
         Route::resource('categories', CategoryController::class);
 
@@ -53,5 +64,8 @@ Route::prefix('admin')->group(function () {
 
         // Post route
         Route::resource('posts', PostController::class);
+
+        // FAQ route
+        Route::resource('faqs', FAQController::class);
     });
 });

@@ -35,6 +35,23 @@
                     <li class="{{ Request::is('admin/homepage/last-news') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.last-news') }}"><i class="fas fa-angle-right"></i>
                             Last News </a></li>
+
+                    <li class="{{ Request::is('admin/terms') ? 'active' : '' }}"><a class="nav-link" href=""><i
+                                class="fas fa-angle-right"></i>
+                            Terms</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/page*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>
+                        Page Setting</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/page/blogs') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.page-blogs') }}"><i class="fas fa-angle-right"></i>
+                            Page Blog </a></li>
+
+                    <li class="{{ Request::is('admin/page/faqs') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.page-faqs') }}"><i class="fas fa-angle-right"></i>
+                            Page FAQ </a></li>
                     <li class="{{ Request::is('admin/terms') ? 'active' : '' }}"><a class="nav-link" href=""><i
                                 class="fas fa-angle-right"></i>
                             Terms</a></li>
@@ -89,6 +106,19 @@
                     <li class="{{ Request::is('admin/posts/create') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('posts.create') }}"><i class="fas fa-angle-right"></i>
                             Add Post</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/faqs*') ? 'active' : '' }}">
+                <a href="{{ url('admin/faqs') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management FAQ</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/faqs') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('faqs.index') }}"><i class="fas fa-angle-right"></i>
+                            List All FAQ </a></li>
+                    <li class="{{ Request::is('admin/faqs/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('faqs.create') }}"><i class="fas fa-angle-right"></i>
+                            Add FAQ</a></li>
                 </ul>
             </li>
 

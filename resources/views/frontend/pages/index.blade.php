@@ -398,7 +398,7 @@
                             </div>
                             <div class="text">
                                 <h2>
-                                    <a href="{{ route('posts.show', [$item->id]) }}">{{ $item->title }}</a>
+                                    <a href="{{ route('blogs.show', [$item->id]) }}">{{ $item->title }}</a>
                                 </h2>
                                 <div class="short-des">
                                     <p>
@@ -406,7 +406,8 @@
                                     </p>
                                 </div>
                                 <div class="button">
-                                    <a href="{{ route('posts.show', [$item->id]) }}" class="btn btn-primary">Read More</a>
+                                    <a href="{{ route('blogs.show', [$item->id]) }}" class="btn btn-primary">Read
+                                        More</a>
                                 </div>
                             </div>
                         </div>
