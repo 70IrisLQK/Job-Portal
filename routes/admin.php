@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\PageBlogController;
+use App\Http\Controllers\Admin\PageCategoryController;
 use App\Http\Controllers\Admin\PageContactController;
 use App\Http\Controllers\admin\PageFAQController;
 use App\Http\Controllers\Admin\PagePrivacyController;
@@ -64,6 +65,9 @@ Route::prefix('admin')->group(function () {
         //Page Contacts
         Route::get('page/contacts', [PageContactController::class, 'pageContact'])->name('admin.page-contacts');
         Route::put('page/contacts/{id}', [PageContactController::class, 'updatePageContact'])->name('admin.update-page-contacts');
+        //Page Categories
+        Route::get('page/categories', [PageCategoryController::class, 'pageCategory'])->name('admin.page-categories');
+        Route::put('page/categories/{id}', [PageCategoryController::class, 'updatePageCategory'])->name('admin.update-page-categories');
 
         // Category route
         Route::resource('categories', CategoryController::class);
