@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PageBlogController;
 use App\Http\Controllers\Admin\PageCategoryController;
 use App\Http\Controllers\Admin\PageContactController;
 use App\Http\Controllers\admin\PageFAQController;
+use App\Http\Controllers\Admin\PagePricingController;
 use App\Http\Controllers\Admin\PagePrivacyController;
 use App\Http\Controllers\Admin\PageTermController;
 use App\Http\Controllers\Admin\PostController;
@@ -69,6 +70,9 @@ Route::prefix('admin')->group(function () {
         //Page Categories
         Route::get('page/categories', [PageCategoryController::class, 'pageCategory'])->name('admin.page-categories');
         Route::put('page/categories/{id}', [PageCategoryController::class, 'updatePageCategory'])->name('admin.update-page-categories');
+        //Page Pricing
+        Route::get('page/pricing', [PagePricingController::class, 'pagePricing'])->name('admin.page-pricing');
+        Route::put('page/pricing/{id}', [PagePricingController::class, 'updatePagePricing'])->name('admin.update-page-pricing');
 
         // Category route
         Route::resource('categories', CategoryController::class);

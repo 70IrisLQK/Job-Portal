@@ -65,6 +65,10 @@
                             href="{{ route('admin.page-categories') }}"><i class="fas fa-angle-right"></i>
                             Page Category </a></li>
 
+                    <li class="{{ Request::is('admin/page/pricing') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.page-pricing') }}"><i class="fas fa-angle-right"></i>
+                            Page Pricing </a></li>
+
                 </ul>
             </li>
             <li class="nav-item dropdown {{ Request::is('admin/categories*') ? 'active' : '' }}">
