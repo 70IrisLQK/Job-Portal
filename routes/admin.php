@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\PageBlogController;
 use App\Http\Controllers\admin\PageFAQController;
+use App\Http\Controllers\Admin\PagePrivacyController;
+use App\Http\Controllers\Admin\PageTermController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\WhyChooseController;
@@ -52,6 +54,12 @@ Route::prefix('admin')->group(function () {
         //Page Blogs
         Route::get('page/blogs', [PageBlogController::class, 'pageBlog'])->name('admin.page-blogs');
         Route::put('page/blogs/{id}', [PageBlogController::class, 'updatePageBlog'])->name('admin.update-page-blogs');
+        //Page Blogs
+        Route::get('page/terms', [PageTermController::class, 'pageTerm'])->name('admin.page-terms');
+        Route::put('page/terms/{id}', [PageTermController::class, 'updatePageTerm'])->name('admin.update-page-terms');
+        //Page Blogs
+        Route::get('page/privacy', [PagePrivacyController::class, 'pagePrivacy'])->name('admin.page-privacy');
+        Route::put('page/privacy/{id}', [PagePrivacyController::class, 'updatePagePrivacy'])->name('admin.update-page-privacy');
 
         // Category route
         Route::resource('categories', CategoryController::class);

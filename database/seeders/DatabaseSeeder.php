@@ -15,14 +15,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            AdminSeeder::class,
-            HomePageSeeder::class,
-            CategorySeeder::class,
-            WhyChooseSeeder::class,
-            TestimonialSeeder::class,
-            PostSeeder::class,
-            PageFAQSeeder::class,
-            PageBlogSeeder::class,
+            // AdminSeeder::class,
+            // HomePageSeeder::class,
+            // CategorySeeder::class,
+            // WhyChooseSeeder::class,
+            // TestimonialSeeder::class,
+            // PostSeeder::class,
+            // PageFAQSeeder::class,
+            // PageBlogSeeder::class,
+            PageTermSeeder::class,
+            PagePrivacySeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

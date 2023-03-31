@@ -35,10 +35,6 @@
                     <li class="{{ Request::is('admin/homepage/last-news') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.last-news') }}"><i class="fas fa-angle-right"></i>
                             Last News </a></li>
-
-                    <li class="{{ Request::is('admin/terms') ? 'active' : '' }}"><a class="nav-link" href=""><i
-                                class="fas fa-angle-right"></i>
-                            Terms</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown {{ Request::is('admin/page*') ? 'active' : '' }}">
@@ -52,9 +48,15 @@
                     <li class="{{ Request::is('admin/page/faqs') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.page-faqs') }}"><i class="fas fa-angle-right"></i>
                             Page FAQ </a></li>
-                    <li class="{{ Request::is('admin/terms') ? 'active' : '' }}"><a class="nav-link" href=""><i
-                                class="fas fa-angle-right"></i>
-                            Terms</a></li>
+
+                    <li class="{{ Request::is('admin/page/terms') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.page-terms') }}"><i class="fas fa-angle-right"></i>
+                            Page Term </a></li>
+
+                    <li class="{{ Request::is('admin/page/privacy') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.page-privacy') }}"><i class="fas fa-angle-right"></i>
+                            Page Privacy </a></li>
+
                 </ul>
             </li>
             <li class="nav-item dropdown {{ Request::is('admin/categories*') ? 'active' : '' }}">

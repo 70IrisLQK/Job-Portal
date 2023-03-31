@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('page_faqs', function (Blueprint $table) {
+        Schema::create('page_privacies', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('page_faqs');
+        Schema::dropIfExists('page_privacies');
     }
 };
