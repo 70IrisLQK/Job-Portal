@@ -8,12 +8,12 @@
         </ul>
     </form>
     <ul class="navbar-nav navbar-right w-100-p justify-content-end">
-        <li class="nav-link">
-            <a href="" target="_blank" class="btn btn-warning">Front End</a>
-        </li>
         @php
             $getAdmin = App\Models\Admin::find(Auth::guard('admin')->user()->id);
         @endphp
+        <li class="nav-link">
+            <a href="{{ url('/') }}" target="_blank" class="btn btn-warning">Front End</a>
+        </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">

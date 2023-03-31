@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Mail;
 
 
 class AdminController extends Controller
@@ -40,7 +40,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-
         if (Auth::guard('admin')->attempt($credential)) {
             $notification = array(
                 'message' => 'Login Successfully',
