@@ -34,6 +34,9 @@ class HomePage extends Model
         'testimonial_title',
         'testimonial_bg',
         'testimonial_status',
+        'latest_news_title',
+        'latest_news_short_title',
+        'latest_news_status',
         'created_at',
         'updated_at'
     ];

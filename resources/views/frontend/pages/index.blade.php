@@ -382,83 +382,36 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Latest News</h2>
+                        <h2>{{ $getHomepage->latest_news_title }}</h2>
                         <p>
-                            Check our latest news from the following section
+                            {{ $getHomepage->latest_news_short_title }}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="item">
-                        <div class="photo">
-                            <img src="{{ asset('frontend/imgs/banner1.jpg') }}" alt="" />
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="post.html">This is a sample blog post title</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    Lorem ipsum dolor sit amet, nibh saperet
-                                    te pri, at nam diceret disputationi. Quo
-                                    an consul impedit, usu possim evertitur
-                                    dissentiet ei.
-                                </p>
+                @foreach ($listPosts as $item)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="item">
+                            <div class="photo">
+                                <img src="{{ asset('frontend/imgs/banner1.jpg') }}" alt="" />
                             </div>
-                            <div class="button">
-                                <a href="post.html" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item">
-                        <div class="photo">
-                            <img src="{{ asset('frontend/imgs/banner2.jpg') }}" alt="" />
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="post.html">This is a sample blog post title</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    Nec in rebum primis causae. Affert
-                                    iisque ex pri, vis utinam vivendo
-                                    definitionem ad, nostrum omnes que per
-                                    et. Omnium antiopam.
-                                </p>
-                            </div>
-                            <div class="button">
-                                <a href="post.html" class="btn btn-primary">Read More</a>
+                            <div class="text">
+                                <h2>
+                                    <a href="{{ route('posts.show', [$item->id]) }}">{{ $item->title }}</a>
+                                </h2>
+                                <div class="short-des">
+                                    <p>
+                                        {{ $item->short_description }}
+                                    </p>
+                                </div>
+                                <div class="button">
+                                    <a href="{{ route('posts.show', [$item->id]) }}" class="btn btn-primary">Read More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item">
-                        <div class="photo">
-                            <img src="{{ asset('frontend/imgs/banner3.jpg') }}" alt="" />
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="post.html">This is a sample blog post title</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    Id pri placerat voluptatum, vero dicunt
-                                    dissentiunt eum et, adhuc iisque vis no.
-                                    Eu suavitate conten tiones definitionem
-                                    mel, ex vide.
-                                </p>
-                            </div>
-                            <div class="button">
-                                <a href="post.html" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

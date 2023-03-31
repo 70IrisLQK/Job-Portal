@@ -36,6 +36,9 @@ return new class extends Migration
             $table->string('testimonial_title', 30);
             $table->string('testimonial_bg');
             $table->tinyInteger('testimonial_status')->default(0);
+            $table->string('latest_news_title', 30);
+            $table->string('latest_news_short_title', 100);
+            $table->tinyInteger('latest_news_status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

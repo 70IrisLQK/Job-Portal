@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\WhyChooseController;
 use Illuminate\Support\Facades\Route;
@@ -37,14 +38,20 @@ Route::prefix('admin')->group(function () {
         //Testimonial
         Route::get('homepage/testimonial', [HomePageController::class, 'testimonial'])->name('admin.testimonial');
         Route::put('testimonial/{id}', [HomePageController::class, 'updateTestimonial'])->name('admin.update-testimonial');
+        //Last News
+        Route::get('homepage/last-news', [HomePageController::class, 'lastNews'])->name('admin.last-news');
+        Route::put('last-news/{id}', [HomePageController::class, 'updateLastNews'])->name('admin.update-last-news');
 
         // Category route
         Route::resource('categories', CategoryController::class);
 
-        // Category route
+        // Why Choose Us route
         Route::resource('chooses', WhyChooseController::class);
 
         // Testimonial route
         Route::resource('testimonials', TestimonialController::class);
+
+        // Post route
+        Route::resource('posts', PostController::class);
     });
 });

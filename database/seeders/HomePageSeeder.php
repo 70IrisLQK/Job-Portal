@@ -37,6 +37,9 @@ class HomePageSeeder extends Seeder
             'testimonial_title' => 'Our Happy Client',
             'testimonial_bg' => 'banner3.jpg',
             'testimonial_status' => 1,
+            'latest_news_title' => 'Latest News',
+            'latest_news_short_title' => 'Check our latest news from the following section',
+            'latest_news_status' => 1,
         ];
 
         HomePage::updateOrCreate($homepage);

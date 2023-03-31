@@ -226,4 +226,34 @@ class HomePageController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function lastNews()
+    {
+        $getHomePage = HomePage::first();
+        return view('admin.pages.homepage.last_news', compact('getHomePage'));
+    }
+    public function updateLastNews(Request $request, $id)
+    {
+        $request->validate([
+            'latest_news_title' => ['required', 'max:30'],
+            'latest_news_short_title' => ['required', 'max:100'],
+            'status' => ['required'],
+        ]);
+        $getHomepage = HomePage::find($id);
+        $getHomepage->update(
+            [
+                'latest_news_title' => $request->latest_news_title,
+                'latest_news_short_title' => $request->latest_news_short_title,
+                'latest_news_status' => intval($request->status),
+                'updated_at' => Carbon::now()
+            ]
+        );
+
+        $notification = [
+            'message' => 'Update Last News Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }

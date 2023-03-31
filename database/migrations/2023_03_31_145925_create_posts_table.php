@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('testimonials', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('description', 50);
-            $table->text('comment');
-            $table->string('image');
+            $table->string('title')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->string('short_description')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('view')->default(1);
+            $table->string('image')->nullable();
+
+            $table->string('created_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonials');
+        Schema::dropIfExists('posts');
     }
 };
