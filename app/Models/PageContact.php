@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PagePrivacy extends Model
+class PageContact extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'page_privacies';
+    protected $table = 'page_contacts';
     protected $guard = [];
     protected $timestamp = false;
-    protected $fillable = ['title', 'description', 'image', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'description', 'map_code', 'image', 'created_at', 'updated_at'];
 }

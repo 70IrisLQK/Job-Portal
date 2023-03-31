@@ -57,6 +57,10 @@
                             href="{{ route('admin.page-privacy') }}"><i class="fas fa-angle-right"></i>
                             Page Privacy </a></li>
 
+                    <li class="{{ Request::is('admin/page/contacts') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.page-contacts') }}"><i class="fas fa-angle-right"></i>
+                            Page Contact </a></li>
+
                 </ul>
             </li>
             <li class="nav-item dropdown {{ Request::is('admin/categories*') ? 'active' : '' }}">

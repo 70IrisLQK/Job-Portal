@@ -1,7 +1,7 @@
 <div class="navbar-area" id="stickymenu">
     <!-- Menu For Mobile Device -->
     <div class="mobile-nav">
-        <a href="index.html" class="logo">
+        <a href="{{ url('/') }}" class="logo">
             <img src="{{ asset('frontend/imgs/logo.png') }}" alt="" />
         </a>
     </div>
@@ -10,13 +10,13 @@
     <div class="main-nav">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('frontend/imgs/logo.png') }}" alt="" />
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a href="index.html" class="nav-link">Home</a>
+                            <a href="{{ url('/') }}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="jobs.html" class="nav-link">
@@ -35,7 +35,7 @@
                             <a href="{{ url('blogs') }}" class="nav-link">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="{{ url('contacts') }}" class="nav-link">Contact</a>
                         </li>
                     </ul>
                 </div>

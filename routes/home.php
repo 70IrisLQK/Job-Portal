@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Frontend\FrontendBlogController;
 use App\Http\Controllers\Frontend\FrontendCategoryController;
+use App\Http\Controllers\frontend\FrontendContactController;
 use App\Http\Controllers\Frontend\FrontEndFAQController;
 use App\Http\Controllers\Frontend\FrontendPrivacyController;
 use App\Http\Controllers\Frontend\FrontendTermController;
@@ -30,3 +31,6 @@ Route::get('/terms', [FrontendTermController::class, 'index']);
 
 // Route privacy
 Route::get('/privacy', [FrontendPrivacyController::class, 'index']);
+
+// Route privacy
+Route::get('/contacts', [FrontendContactController::class, 'index']);
