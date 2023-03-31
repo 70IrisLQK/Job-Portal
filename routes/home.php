@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\FrontendBlogController;
 use App\Http\Controllers\Frontend\FrontendCategoryController;
 use App\Http\Controllers\frontend\FrontendContactController;
 use App\Http\Controllers\Frontend\FrontEndFAQController;
+use App\Http\Controllers\Frontend\FrontendPricingController;
 use App\Http\Controllers\Frontend\FrontendPrivacyController;
 use App\Http\Controllers\Frontend\FrontendTermController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -34,3 +35,6 @@ Route::get('/privacy', [FrontendPrivacyController::class, 'index']);
 
 // Route privacy
 Route::get('/contacts', [FrontendContactController::class, 'index']);
+
+// Route pricing
+Route::get('/pricing', [FrontendPricingController::class, 'index']);

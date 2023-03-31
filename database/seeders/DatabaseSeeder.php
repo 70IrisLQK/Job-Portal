@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             // PageTermSeeder::class,
             // PagePrivacySeeder::class,
             // PageContactSeeder::class,
-            PageCategorySeeder::class,
+            // PageCategorySeeder::class,
+            PackageSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageBlogController;
 use App\Http\Controllers\Admin\PageCategoryController;
 use App\Http\Controllers\Admin\PageContactController;
@@ -83,5 +84,8 @@ Route::prefix('admin')->group(function () {
 
         // FAQ route
         Route::resource('faqs', FAQController::class);
+
+        // Package route
+        Route::resource('packages', PackageController::class);
     });
 });

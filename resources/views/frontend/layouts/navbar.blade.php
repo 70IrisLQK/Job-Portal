@@ -26,7 +26,7 @@
                             <a href="companies.html" class="nav-link">Companies</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pricing.html" class="nav-link">Pricing</a>
+                            <a href="{{ url('pricing') }}" class="nav-link">Pricing</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('faqs') }}" class="nav-link">FAQ</a>

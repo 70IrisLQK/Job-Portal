@@ -131,6 +131,19 @@
                             Add FAQ</a></li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ Request::is('admin/packages*') ? 'active' : '' }}">
+                <a href="{{ url('admin/packages') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Package</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/packages') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('packages.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Package </a></li>
+                    <li class="{{ Request::is('admin/packages/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('packages.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Package</a></li>
+                </ul>
+            </li>
 
 
         </ul>
