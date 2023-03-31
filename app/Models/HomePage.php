@@ -31,6 +31,9 @@ class HomePage extends Model
         'feature_job_title',
         'feature_job_short_title',
         'feature_job_status',
+        'testimonial_title',
+        'testimonial_bg',
+        'testimonial_status',
         'created_at',
         'updated_at'
     ];

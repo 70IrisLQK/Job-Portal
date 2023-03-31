@@ -181,4 +181,49 @@ class HomePageController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function testimonial()
+    {
+        $getHomePage = HomePage::first();
+        return view('admin.pages.homepage.testimonial', compact('getHomePage'));
+    }
+    public function updateTestimonial(Request $request, $id)
+    {
+        $request->validate([
+            'testimonial_title' => ['required', 'max:30'],
+            'status' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:1000']
+        ]);
+
+        $getHomepage = HomePage::findOrFail($id);
+        $pathName = $getHomepage->testimonial_bg;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $pathName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $path = public_path(HomePageController::PUBLIC_PATH);
+            Image::make($image)->resize(1300, 866)->save($path . $pathName);
+
+            $imageExist = $getHomepage->testimonial_bg;
+            if (file_exists($path  . $imageExist)) {
+                unlink($path . $imageExist);
+            }
+        }
+
+        $getHomepage->update(
+            [
+                'testimonial_title' => $request->testimonial_title,
+                'testimonial_bg' => $pathName,
+                'testimonial_status' => intval($request->status),
+                'updated_at' => Carbon::now()
+            ]
+        );
+
+        $notification = [
+            'message' => 'Update Testimonial Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }

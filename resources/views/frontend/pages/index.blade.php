@@ -341,57 +341,36 @@
         </div>
     </div>
 
-    <div class="testimonial" style="background-image: url({{ asset('frontend/imgs/banner11.jpg') }})">
+    <div class="testimonial"
+        style="background-image: url({{ asset('upload/testimonials/' . $getHomepage->testimonial_bg) }})">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="main-header">Our Happy Clients</h2>
+                    <h2 class="main-header">{{ $getHomepage->testimonial_title }}</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="testimonial-carousel owl-carousel">
-                        <div class="item">
-                            <div class="photo">
-                                <img src="{{ asset('frontend/imgs/t1.jpg') }}" alt="" />
+                        @foreach ($listTestimonials as $testimonial)
+                            <div class="item">
+                                <div class="photo">
+                                    <img src="{{ asset('upload/testimonials/' . $testimonial->image) }}"
+                                        alt="" />
+                                </div>
+                                <div class="text">
+                                    <h4>{{ $testimonial->name }}</h4>
+                                    <p>{{ $testimonial->description }}</p>
+                                </div>
+                                <div class="description">
+                                    <p>
+                                        {{ $testimonial->comment }}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="text">
-                                <h4>Robert Krol</h4>
-                                <p>CEO, ABC Company</p>
-                            </div>
-                            <div class="description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, an labores
-                                    explicari qui, eu nostrum copiosae
-                                    argumentum has. Latine propriae quo no,
-                                    unum ridens. Lorem ipsum dolor sit amet,
-                                    an labores explicari qui, eu nostrum
-                                    copiosae argumentum has. Latine propriae
-                                    quo no, unum ridens.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="photo">
-                                <img src="{{ asset('frontend/imgs/t2.jpg') }}" alt="" />
-                            </div>
-                            <div class="text">
-                                <h4>Sal Harvey</h4>
-                                <p>Director, DEF Company</p>
-                            </div>
-                            <div class="description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, an labores
-                                    explicari qui, eu nostrum copiosae
-                                    argumentum has. Latine propriae quo no,
-                                    unum ridens. Lorem ipsum dolor sit amet,
-                                    an labores explicari qui, eu nostrum
-                                    copiosae argumentum has. Latine propriae
-                                    quo no, unum ridens.
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>

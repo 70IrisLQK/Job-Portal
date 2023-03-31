@@ -18,7 +18,7 @@ class HomePageSeeder extends Seeder
         $homepage = [
             'title' => 'Find Your Desired Job',
             'short_title' => 'Search the best, perfect and suitable jobs that matches your skills in your expertise area.',
-            'background' => 'banner5.jpg',
+            'background' => 'banner1.jpg',
             'job_title' => 'Job Title',
             'job_category' => 'Job Category',
             'job_location' => 'Job Location',
@@ -29,11 +29,14 @@ class HomePageSeeder extends Seeder
             'job_category_status' => 1,
             'why_choose_title' => "Why Choose Us",
             'why_choose_short_title' => "Our Methods to help you build your career in future",
-            'why_choose_bg' => "banner5.jpg",
+            'why_choose_bg' => "banner2.jpg",
             'why_choose_status' => 1,
             'feature_job_title' => "Featured Jobs",
             'feature_job_short_title' => "Find the awesome jobs that matches your skill",
             'feature_job_status' => 1,
+            'testimonial_title' => 'Our Happy Client',
+            'testimonial_bg' => 'banner3.jpg',
+            'testimonial_status' => 1,
         ];
 
         HomePage::updateOrCreate($homepage);

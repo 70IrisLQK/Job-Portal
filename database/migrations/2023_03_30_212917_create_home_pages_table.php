@@ -33,6 +33,9 @@ return new class extends Migration
             $table->string('feature_job_title', 30);
             $table->string('feature_job_short_title', 100);
             $table->tinyInteger('feature_job_status')->default(0);
+            $table->string('testimonial_title', 30);
+            $table->string('testimonial_bg');
+            $table->tinyInteger('testimonial_status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
