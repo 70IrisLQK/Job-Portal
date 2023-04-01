@@ -19,4 +19,13 @@ class CompanyPaymentController extends Controller
 
         return view('frontend.pages.company.company_payment', compact('currentPlan', 'listPackages'));
     }
+
+    public function orders()
+    {
+        $listOrders = Order::with('package')->latest()->get();
+        return view(
+            'frontend.pages.company.company_orders',
+            compact('listOrders')
+        );
+    }
 }

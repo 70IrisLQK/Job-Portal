@@ -36,5 +36,8 @@ Route::prefix('company')->group(function () {
         Route::post('stripe/payment', [StripeController::class, 'stripe'])->name('company.stripe');
         Route::get('stripe/success', [StripeController::class, 'success'])->name('company.stripe-success');
         Route::get('stripe/cancel', [StripeController::class, 'cancel'])->name('company.stripe-cancel');
+
+        // Order
+        Route::get('orders', [CompanyPaymentController::class, 'orders'])->name('company.orders');
     });
 });
