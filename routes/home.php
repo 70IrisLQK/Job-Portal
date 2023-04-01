@@ -49,3 +49,6 @@ Route::get('/pricing', [PricingController::class, 'index']);
 
 // Company
 require __DIR__ . '/company.php';
+
+// Candidate
+require __DIR__ . '/candidate.php';

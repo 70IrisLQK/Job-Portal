@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'companies',
         ],
+        'candidate' => [
+            'driver' => 'session',
+            'provider' => 'candidates',
+        ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
         'companies' => [
             'driver' => 'eloquent',
             'model' => App\Models\Company::class,
+        ],
+        'candidates' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Candidate::class,
         ],
 
         // 'users' => [
@@ -116,6 +124,12 @@ return [
             'throttle' => 60,
         ],
         'companies' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'candidates' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
