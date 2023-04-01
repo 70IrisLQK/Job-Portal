@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+    @include('frontend.components.display_toast')
     {{-- Top --}}
     @include('frontend.layouts.top')
 

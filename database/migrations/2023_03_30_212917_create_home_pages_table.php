@@ -39,6 +39,8 @@ return new class extends Migration
             $table->string('latest_news_title', 30);
             $table->string('latest_news_short_title', 100);
             $table->tinyInteger('latest_news_status')->default(0);
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

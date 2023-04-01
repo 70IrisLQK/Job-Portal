@@ -10,3 +10,4 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/meanmenu.css') }}" />
 <link rel="stylesheet" href="{{ asset('frontend/css/spacing.css') }}" />
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
+<link rel="stylesheet" href="{{ asset('backend/css/toastr.min.css') }}">

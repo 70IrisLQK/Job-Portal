@@ -8,14 +8,22 @@
                 </ul>
             </div>
             <div class="col-md-6 right-side">
-                <ul class="right">
-                    <li class="menu">
-                        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    </li>
-                    <li class="menu">
-                        <a href="signup.html"><i class="fas fa-user"></i> Sign Up</a>
-                    </li>
-                </ul>
+                @if (!Auth::guard('company')->check())
+                    <ul class="right">
+                        <li class="menu">
+                            <a href="{{ url('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        </li>
+                        <li class="menu">
+                            <a href="{{ url('register') }}"><i class="fas fa-user"></i> Sign Up</a>
+                        </li>
+                    </ul>
+                @else
+                    <ul class="right">
+                        <li class="menu">
+                            <a href="{{ url('company/dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
+                        </li>
+                    </ul>
+                @endif
             </div>
         </div>
     </div>

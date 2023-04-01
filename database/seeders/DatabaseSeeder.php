@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             // PageContactSeeder::class,
             // PageCategorySeeder::class,
             // PackageSeeder::class,
-            PagePricingSeeder::class,
+            // PagePricingSeeder::class,
+            OtherItemsSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
