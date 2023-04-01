@@ -152,6 +152,32 @@
                             Add Package</a></li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ Request::is('admin/locations*') ? 'active' : '' }}">
+                <a href="{{ url('admin/locations') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Job Location</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/locations') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('locations.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Location </a></li>
+                    <li class="{{ Request::is('admin/locations/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('locations.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Location</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/types*') ? 'active' : '' }}">
+                <a href="{{ url('admin/types') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Job Type</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/types') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('types.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Type </a></li>
+                    <li class="{{ Request::is('admin/types/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('types.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Type</a></li>
+                </ul>
+            </li>
 
 
         </ul>

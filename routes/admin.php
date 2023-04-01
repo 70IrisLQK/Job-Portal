@@ -3,9 +3,11 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\crud\AdminCategoryController;
 use App\Http\Controllers\Admin\crud\AdminFAQController;
+use App\Http\Controllers\Admin\crud\AdminJobLocationController;
 use App\Http\Controllers\Admin\crud\AdminPackageController;
 use App\Http\Controllers\Admin\crud\AdminPostController;
 use App\Http\Controllers\Admin\crud\AdminTestimonialController;
+use App\Http\Controllers\Admin\crud\AdminTypeController;
 use App\Http\Controllers\Admin\crud\AdminWhyChooseController;
 use App\Http\Controllers\Admin\homepage\AdminHomePageController;
 use App\Http\Controllers\Admin\page\AdminOtherItemsController;
@@ -95,5 +97,11 @@ Route::prefix('admin')->group(function () {
 
         // Package route
         Route::resource('packages', AdminPackageController::class);
+
+        // Job Location route
+        Route::resource('locations', AdminJobLocationController::class);
+
+        // Job Type route
+        Route::resource('types', AdminTypeController::class);
     });
 });
