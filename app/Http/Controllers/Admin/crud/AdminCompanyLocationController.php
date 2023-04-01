@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
-use App\Models\Salary;
+use App\Models\CompanyLocation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class AdminSalaryController extends Controller
+class AdminCompanyLocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class AdminSalaryController extends Controller
      */
     public function index()
     {
-        $listSalaries = Salary::all();
-        return view('admin.pages.salary.list_salary', compact('listSalaries'));
+        $listLocations = CompanyLocation::all();
+        return view('admin.pages.company.company_location.list_location', compact('listLocations'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AdminSalaryController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.salary.add_salary');
+        return view('admin.pages.company.company_location.add_location');
     }
 
     /**
@@ -42,7 +42,7 @@ class AdminSalaryController extends Controller
             'name' => ['required', 'max:255'],
         ]);
 
-        Salary::create(
+        CompanyLocation::create(
             [
                 'name' => $request->name,
                 'created_at' => Carbon::now(),
@@ -50,7 +50,7 @@ class AdminSalaryController extends Controller
         );
 
         $notification = array(
-            'message' => 'Created Salary Successfully.',
+            'message' => 'Created CompanyLocation Successfully.',
             'alert-type' => 'success'
         );
 
@@ -75,8 +75,8 @@ class AdminSalaryController extends Controller
      */
     public function edit($id)
     {
-        $getSalaryById = Salary::find($id);
-        return view('admin.pages.salary.edit_salary', compact('getSalaryById'));
+        $getCompanyLocationById = CompanyLocation::find($id);
+        return view('admin.pages.company.company_location.edit_location', compact('getCompanyLocationById'));
     }
 
     /**
@@ -92,7 +92,7 @@ class AdminSalaryController extends Controller
             'name' => ['required', 'max:255'],
         ]);
 
-        Salary::updateOrCreate(
+        CompanyLocation::updateOrCreate(
             [
                 'id' => $id
             ],
@@ -103,7 +103,7 @@ class AdminSalaryController extends Controller
         );
 
         $notification = array(
-            'message' => 'Updated Salary Successfully.',
+            'message' => 'Updated CompanyLocation Successfully.',
             'alert-type' => 'success'
         );
 
@@ -118,10 +118,10 @@ class AdminSalaryController extends Controller
      */
     public function destroy($id)
     {
-        Salary::destroy($id);
+        CompanyLocation::destroy($id);
 
         $notification = array(
-            'message' => 'Deleted Salary Successfully.',
+            'message' => 'Deleted CompanyLocation Successfully.',
             'alert-type' => 'success'
         );
 

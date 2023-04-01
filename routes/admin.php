@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\crud\AdminCategoryController;
+use App\Http\Controllers\Admin\crud\AdminCompanyFoundedController;
+use App\Http\Controllers\Admin\crud\AdminCompanyIndustryController;
+use App\Http\Controllers\Admin\crud\AdminCompanyLocationController;
+use App\Http\Controllers\Admin\crud\AdminCompanySizeController;
 use App\Http\Controllers\Admin\crud\AdminExperienceController;
 use App\Http\Controllers\Admin\crud\AdminFAQController;
 use App\Http\Controllers\Admin\crud\AdminGenderController;
@@ -115,5 +119,11 @@ Route::prefix('admin')->group(function () {
 
         // Job Genre route
         Route::resource('genres', AdminGenderController::class);
+
+        // Company Location route
+        Route::resource('company-locations', AdminCompanyLocationController::class);
+        Route::resource('industry', AdminCompanyIndustryController::class);
+        Route::resource('size', AdminCompanySizeController::class);
+        Route::resource('founded', AdminCompanyFoundedController::class);
     });
 });

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
-use App\Models\Salary;
+use App\Models\CompanyIndustry;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class AdminSalaryController extends Controller
+class AdminCompanyIndustryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,11 @@ class AdminSalaryController extends Controller
      */
     public function index()
     {
-        $listSalaries = Salary::all();
-        return view('admin.pages.salary.list_salary', compact('listSalaries'));
+        $listIndustry = CompanyIndustry::all();
+        return view(
+            'admin.pages.company.company_industry.list_industry',
+            compact('listIndustry')
+        );
     }
 
     /**
@@ -27,7 +30,7 @@ class AdminSalaryController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.salary.add_salary');
+        return view('admin.pages.company.company_industry.add_industry');
     }
 
     /**
@@ -42,7 +45,7 @@ class AdminSalaryController extends Controller
             'name' => ['required', 'max:255'],
         ]);
 
-        Salary::create(
+        CompanyIndustry::create(
             [
                 'name' => $request->name,
                 'created_at' => Carbon::now(),
@@ -50,7 +53,7 @@ class AdminSalaryController extends Controller
         );
 
         $notification = array(
-            'message' => 'Created Salary Successfully.',
+            'message' => 'Created CompanyIndustry Successfully.',
             'alert-type' => 'success'
         );
 
@@ -75,8 +78,8 @@ class AdminSalaryController extends Controller
      */
     public function edit($id)
     {
-        $getSalaryById = Salary::find($id);
-        return view('admin.pages.salary.edit_salary', compact('getSalaryById'));
+        $getCompanyIndustryById = CompanyIndustry::find($id);
+        return view('admin.pages.company.company_industry.edit_industry', compact('getCompanyIndustryById'));
     }
 
     /**
@@ -92,7 +95,7 @@ class AdminSalaryController extends Controller
             'name' => ['required', 'max:255'],
         ]);
 
-        Salary::updateOrCreate(
+        CompanyIndustry::updateOrCreate(
             [
                 'id' => $id
             ],
@@ -103,7 +106,7 @@ class AdminSalaryController extends Controller
         );
 
         $notification = array(
-            'message' => 'Updated Salary Successfully.',
+            'message' => 'Updated CompanyIndustry Successfully.',
             'alert-type' => 'success'
         );
 
@@ -118,10 +121,10 @@ class AdminSalaryController extends Controller
      */
     public function destroy($id)
     {
-        Salary::destroy($id);
+        CompanyIndustry::destroy($id);
 
         $notification = array(
-            'message' => 'Deleted Salary Successfully.',
+            'message' => 'Deleted CompanyIndustry Successfully.',
             'alert-type' => 'success'
         );
 

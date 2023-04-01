@@ -217,8 +217,59 @@
                             Add Genre</a></li>
                 </ul>
             </li>
-
-
+            <li class="nav-item dropdown {{ Request::is('admin/company-locations*') ? 'active' : '' }}">
+                <a href="{{ url('admin/company-locations') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Company Location</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/company-locations') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('company-locations.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Company Location </a></li>
+                    <li class="{{ Request::is('admin/company-locations/create') ? 'active' : '' }}"><a
+                            class="nav-link" href="{{ route('company-locations.create') }}"><i
+                                class="fas fa-angle-right"></i>
+                            Add Company Location</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/industry*') ? 'active' : '' }}">
+                <a href="{{ url('admin/industry') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Company Industry</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/industry') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('industry.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Company Industry </a></li>
+                    <li class="{{ Request::is('admin/industry/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('industry.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Company Industry</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/size*') ? 'active' : '' }}">
+                <a href="{{ url('admin/size') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Company Size</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/size') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('size.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Company Size </a></li>
+                    <li class="{{ Request::is('admin/size/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('size.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Company Size</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/founded*') ? 'active' : '' }}">
+                <a href="{{ url('admin/founded') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Company Founded</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/founded') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('founded.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Company Founded </a></li>
+                    <li class="{{ Request::is('admin/founded/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('founded.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Company Founded</a></li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>
