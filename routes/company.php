@@ -49,5 +49,10 @@ Route::prefix('company')->group(function () {
         Route::get('photos', [CompanyController::class, 'photos'])->name('company.photos');
         Route::post('photos/submit', [CompanyController::class, 'photoSubmit'])->name('company.photos-submit');
         Route::get('photos/delete/{id}', [CompanyController::class, 'photoDelete'])->name('company.photos-delete');
+
+        // Video
+        Route::get('videos', [CompanyController::class, 'videos'])->name('company.videos');
+        Route::post('videos/submit', [CompanyController::class, 'videoSubmit'])->name('company.videos-submit');
+        Route::get('videos/delete/{id}', [CompanyController::class, 'videoDelete'])->name('company.videos-delete');
     });
 });

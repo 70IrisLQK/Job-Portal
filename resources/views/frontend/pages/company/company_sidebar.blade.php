@@ -20,7 +20,7 @@
                 <a href="{{ route('company.photos') }}">Photos</a>
             </li>
             <li class="list-group-item">
-                <a href="company-videos.html">Videos</a>
+                <a href="{{ route('company.videos') }}">Videos</a>
             </li>
             <li class="list-group-item">
                 <a href="company-applications.html">Candidate Applications</a>

@@ -9,6 +9,7 @@ use App\Models\CompanyIndustry;
 use App\Models\CompanyLocation;
 use App\Models\CompanyPhoto;
 use App\Models\CompanySize;
+use App\Models\CompanyVideo;
 use App\Models\Order;
 use App\Models\Package;
 use Illuminate\Http\Request;
@@ -198,6 +199,84 @@ class CompanyController extends Controller
 
         $notification = [
             'message' => 'Deleted Photo Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+    public function videos()
+    {
+        $companyId = Auth::guard('company')->user()->id;
+        // Check if a person buy a package
+        $getOrder = Order::where('company_id', $companyId)
+            ->where('currently_active', 1)->first();
+
+        if (!$getOrder) {
+            $notification = array(
+                'message' => 'Your must have to buy package first to access this page.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+
+        //Check if the person has access to this page under the current package
+        $getPackage = Package::where('id', $getOrder->package_id)->first();
+
+        if ($getPackage->total_allowed_videos == 0) {
+            $notification = array(
+                'message' => 'Your current package dose not allow to upload video.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+
+        $getVideos = CompanyVideo::where('company_id', $companyId)->latest('id')->get();
+        return view('frontend.pages.company.company_video', compact('getVideos'));
+    }
+
+    public function videoSubmit(Request $request)
+    {
+        $companyId = Auth::guard('company')->user()->id;
+
+        $getOrder = Order::where('company_id', $companyId)
+            ->where('currently_active', 1)->first();
+        $getPackage = Package::where('id', $getOrder->package_id)->first();
+        $existingVideo = CompanyVideo::where('company_id', $companyId)->count();
+
+        if ($getPackage->total_allowed_videos == $existingVideo) {
+            $notification = array(
+                'message' => 'Maximum number of allowed videos. So you have to upgrade your package if you want upload more video.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+
+        $request->validate([
+            'video' => ['required', 'max:255']
+        ]);
+
+        CompanyVideo::create([
+            'video' => $request->video,
+            'created_at' => time(),
+            'company_id' => $companyId
+        ]);
+
+        $notification = array(
+            'message' => 'Create Video Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function videoDelete($id)
+    {
+        $getVideoById = CompanyVideo::findOrFail($id);
+
+        $getVideoById->delete();
+
+        $notification = [
+            'message' => 'Deleted Video Successfully.',
             'alert-type' => 'success'
         ];
 
