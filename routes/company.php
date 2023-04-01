@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\company\CompanyController;
 use App\Http\Controllers\Frontend\company\CompanyForgerPasswordController;
 use App\Http\Controllers\Frontend\company\CompanyHomeController;
 use App\Http\Controllers\Frontend\company\CompanyLoginController;
@@ -39,5 +40,14 @@ Route::prefix('company')->group(function () {
 
         // Order
         Route::get('orders', [CompanyPaymentController::class, 'orders'])->name('company.orders');
+
+        // Profile
+        Route::get('edit-profile', [CompanyController::class, 'editProfile'])->name('company.edit-profile');
+        Route::put('update-profile/{id}', [CompanyController::class, 'updateProfile'])->name('company.update-profile');
+
+        // Photo
+        Route::get('photos', [CompanyController::class, 'photos'])->name('company.photos');
+        Route::post('photos/submit', [CompanyController::class, 'photoSubmit'])->name('company.photos-submit');
+        Route::get('photos/delete/{id}', [CompanyController::class, 'photoDelete'])->name('company.photos-delete');
     });
 });

@@ -17,7 +17,7 @@
                 <a href="company-jobs.html">All Jobs</a>
             </li>
             <li class="list-group-item">
-                <a href="company-photos.html">Photos</a>
+                <a href="{{ route('company.photos') }}">Photos</a>
             </li>
             <li class="list-group-item">
                 <a href="company-videos.html">Videos</a>
@@ -26,7 +26,7 @@
                 <a href="company-applications.html">Candidate Applications</a>
             </li>
             <li class="list-group-item">
-                <a href="company-edit-profile.html">Edit Profile</a>
+                <a href="{{ route('company.edit-profile') }}">Edit Profile</a>
             </li>
             <li class="list-group-item">
                 <form id="form_submit" action="{{ route('company.logout') }}" method="post">

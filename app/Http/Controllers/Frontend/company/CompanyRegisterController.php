@@ -49,7 +49,7 @@ class CompanyRegisterController extends Controller
             'alert-type' => 'success',
         ];
 
-        return redirect()->back()->with($notification);
+        return redirect('login')->with($notification);
     }
 
     public function verifyAccount($token, $email)
