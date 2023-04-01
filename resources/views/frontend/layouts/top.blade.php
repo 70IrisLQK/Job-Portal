@@ -8,7 +8,7 @@
                 </ul>
             </div>
             <div class="col-md-6 right-side">
-                @if (!Auth::guard('company')->check())
+                @if (!Auth::guard('company')->check() && !Auth::guard('candidate')->check())
                     <ul class="right">
                         <li class="menu">
                             <a href="{{ url('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
@@ -18,11 +18,19 @@
                         </li>
                     </ul>
                 @else
-                    <ul class="right">
-                        <li class="menu">
-                            <a href="{{ url('company/dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
-                        </li>
-                    </ul>
+                    @if (Auth::guard('company')->check())
+                        <ul class="right">
+                            <li class="menu">
+                                <a href="{{ url('company/dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="right">
+                            <li class="menu">
+                                <a href="{{ url('candidate/dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
+                            </li>
+                        </ul>
+                    @endif
                 @endif
             </div>
         </div>

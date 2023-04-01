@@ -52,7 +52,7 @@ class CompanyForgerPasswordController extends Controller
             'message' => 'Send Link Reset Password Successfully.',
             'alert-type' => 'success'
         );
-        return redirect()->route('company.login')->with($notification);
+        return redirect('login')->with($notification);
     }
 
     public function companyResetPassword($token, $email)

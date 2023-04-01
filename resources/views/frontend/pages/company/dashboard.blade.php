@@ -13,45 +13,7 @@
     <div class="page-content user-panel">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-12">
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item active">
-                                <a href="company-dashboard.html">Dashboard</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-payment.html">Make Payment</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-orders.html">Orders</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-job-add.html">Create Job</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-jobs.html">All Jobs</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-photos.html">Photos</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-videos.html">Videos</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-applications.html">Candidate Applications</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="company-edit-profile.html">Edit Profile</a>
-                            </li>
-                            <li class="list-group-item">
-                                <form id="form_submit" action="{{ route('company.logout') }}" method="post">
-                                    @csrf
-                                    <a onclick="submitForm()" href="#">Logout</a>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                @include('frontend.pages.company.company_sidebar')
                 <div class="col-lg-9 col-md-12">
                     <h3>{{ Auth::guard('company')->user()->name }}</h3>
                     <p>See all the statistics at a glance:</p>
@@ -123,10 +85,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function submitForm() {
-            let form = document.getElementById("form_submit");
-            form.submit();
-        }
-    </script>
 @endsection
