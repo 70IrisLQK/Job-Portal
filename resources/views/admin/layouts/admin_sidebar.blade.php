@@ -178,6 +178,45 @@
                             Add Type</a></li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ Request::is('admin/experiences*') ? 'active' : '' }}">
+                <a href="{{ url('admin/experiences') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Job Experience</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/experiences') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('experiences.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Experience </a></li>
+                    <li class="{{ Request::is('admin/experiences/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('experiences.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Experience</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/salaries*') ? 'active' : '' }}">
+                <a href="{{ url('admin/salaries') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Job Salary</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/salaries') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('salaries.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Salary </a></li>
+                    <li class="{{ Request::is('admin/salaries/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('salaries.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Salary</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin/genres*') ? 'active' : '' }}">
+                <a href="{{ url('admin/genres') }}" class="nav-link has-dropdown"><i
+                        class="fas fa-hand-point-right"></i><span>
+                        Management Job Genre</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/genres') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('genres.index') }}"><i class="fas fa-angle-right"></i>
+                            List All Genre </a></li>
+                    <li class="{{ Request::is('admin/genres/create') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('genres.create') }}"><i class="fas fa-angle-right"></i>
+                            Add Genre</a></li>
+                </ul>
+            </li>
 
 
         </ul>

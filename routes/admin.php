@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\crud\AdminCategoryController;
+use App\Http\Controllers\Admin\crud\AdminExperienceController;
 use App\Http\Controllers\Admin\crud\AdminFAQController;
+use App\Http\Controllers\Admin\crud\AdminGenderController;
 use App\Http\Controllers\Admin\crud\AdminJobLocationController;
 use App\Http\Controllers\Admin\crud\AdminPackageController;
 use App\Http\Controllers\Admin\crud\AdminPostController;
+use App\Http\Controllers\Admin\crud\AdminSalaryController;
 use App\Http\Controllers\Admin\crud\AdminTestimonialController;
 use App\Http\Controllers\Admin\crud\AdminTypeController;
 use App\Http\Controllers\Admin\crud\AdminWhyChooseController;
@@ -103,5 +106,14 @@ Route::prefix('admin')->group(function () {
 
         // Job Type route
         Route::resource('types', AdminTypeController::class);
+
+        // Job Experience route
+        Route::resource('experiences', AdminExperienceController::class);
+
+        // Job Salary route
+        Route::resource('salaries', AdminSalaryController::class);
+
+        // Job Genre route
+        Route::resource('genres', AdminGenderController::class);
     });
 });
