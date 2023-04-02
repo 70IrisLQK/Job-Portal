@@ -29,7 +29,7 @@
                 <a href="{{ route('candidate_edit_profile') }}">Edit Profile</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-resume.html">Resume Upload</a>
+                <a href="{{ route('resume.index') }}">Resume Upload</a>
             </li>
             <li class="list-group-item">
                 <form id="form_submit" action="{{ route('candidate.logout') }}" method="post">

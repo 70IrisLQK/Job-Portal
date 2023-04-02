@@ -8,7 +8,9 @@ use App\Http\Controllers\Frontend\candidate\CandidateForgerPasswordController;
 use App\Http\Controllers\Frontend\candidate\CandidateHomeController;
 use App\Http\Controllers\Frontend\candidate\CandidateLoginController;
 use App\Http\Controllers\Frontend\candidate\CandidateRegisterController;
+use App\Http\Controllers\Frontend\candidate\CandidateResumeController;
 use App\Http\Controllers\Frontend\candidate\CandidateSkillController;
+use App\Models\CandidateResume;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -47,5 +49,8 @@ Route::prefix('candidate')->group(function () {
 
         //Education
         Route::resource('award', CandidateAwardController::class);
+
+        //Resume
+        Route::resource('resume', CandidateResumeController::class);
     });
 });
