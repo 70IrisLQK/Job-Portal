@@ -67,7 +67,6 @@ class JobController extends Controller
         }
 
         $getJobs = $getJobs->paginate(6)->appends($request->all());
-
         return view('frontend.pages.jobs', compact(
             'getJobs',
             'getCategory',
@@ -97,7 +96,6 @@ class JobController extends Controller
             'experience',
             'gender'
         )->where('slug', $slug)->first();
-
         $getJobsRelate = Jobs::with(
             'category',
             'location',

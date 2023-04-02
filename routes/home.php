@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\company\CompanyController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\Frontend\FAQController;
 use App\Http\Controllers\Frontend\ForgetController;
@@ -27,6 +28,12 @@ Route::get('/forget-password', [ForgetController::class, 'index']);
 Route::get('/jobs', [JobController::class, 'jobs'])->name('jobs.listing');
 Route::get('/jobs/detail/{slug}', [JobController::class, 'jobDetail'])->name('jobs.detail');
 Route::post('/jobs/enquery/email', [JobController::class, 'jobSendmail'])->name('jobs.send_mail');
+
+// Route company search
+Route::get('/companies', [CompanyController::class, 'companies'])->name('companies.listing');
+Route::get('/companies/detail/{slug}', [CompanyController::class, 'companyDetail'])->name('companies.detail');
+Route::post('/companies/contact/email', [CompanyController::class, 'companyContact'])->name('companies.contact');
+
 
 // Route category
 Route::get('/categories', [CategoryController::class, 'index']);

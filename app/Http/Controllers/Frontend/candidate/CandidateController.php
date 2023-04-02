@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\CandidateBookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -107,6 +108,53 @@ class CandidateController extends Controller
 
         $notification = [
             'message' => 'Updated Password Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function bookmark($id)
+    {
+        $candidateId = Auth::guard('candidate')->user()->id;
+
+        $existingBookmark = CandidateBookmark::where('candidate_id', $candidateId)->where('job_id', $id)->count();
+        if ($existingBookmark > 0) {
+            $notification = [
+                'message' => 'This Job already bookmark Successfully.',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+
+        CandidateBookmark::create([
+            'candidate_id' => $candidateId,
+            'job_id' => $id
+        ]);
+
+        $notification = [
+            'message' => 'This Job bookmark Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function bookmarks()
+    {
+        $candidateId = Auth::guard('candidate')->user()->id;
+        $getBookmark = CandidateBookmark::with('job')->where('candidate_id', $candidateId)->latest('id')->get();
+
+        return view('frontend.pages.candidate.candidate_bookmarked_jobs', compact('getBookmark'));
+    }
+
+    public function deleteBookmark($id)
+    {
+        CandidateBookmark::destroy($id);
+
+        $notification = [
+            'message' => 'This Job bookmark delete Successfully.',
             'alert-type' => 'success'
         ];
 

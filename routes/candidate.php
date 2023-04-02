@@ -52,5 +52,10 @@ Route::prefix('candidate')->group(function () {
 
         //Resume
         Route::resource('resume', CandidateResumeController::class);
+
+        //Bookmark
+        Route::get('bookmark/{id}', [CandidateController::class, 'bookmark'])->name('candidate.bookmark');
+        Route::get('bookmarks', [CandidateController::class, 'bookmarks'])->name('bookmark.index');
+        Route::delete('bookmarks/{id}/delete', [CandidateController::class, 'deleteBookmark'])->name('bookmark.destroy');
     });
 });

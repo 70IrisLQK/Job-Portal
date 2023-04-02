@@ -34,7 +34,7 @@
                                             @if ($job->is_featured == 1)
                                                 <span class="badge bg-success">Featured</span>
                                             @else
-                                                <span class="badge bg-danger">Not Featured</span>
+                                                <span class="badge bg-danger">Pending</span>
                                             @endif
                                         </td>
                                         <td>

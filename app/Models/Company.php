@@ -44,7 +44,7 @@ class Company extends Authenticatable
         'phone',
         'address',
         'website',
-        'country_location_id',
+        'company_location_id',
         'company_size_id',
         'company_founded_id',
         'company_industry_id',
@@ -64,4 +64,29 @@ class Company extends Authenticatable
         'status',
         'created_at', 'updated_at'
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany(Jobs::class, 'company_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(CompanyLocation::class, 'company_location_id');
+    }
+
+    public function size()
+    {
+        return $this->belongsTo(CompanySize::class, 'company_size_id');
+    }
+
+    public function industry()
+    {
+        return $this->belongsTo(CompanyIndustry::class, 'company_industry_id');
+    }
+
+    public function founded()
+    {
+        return $this->belongsTo(CompanyFounded::class, 'company_founded_id');
+    }
 }

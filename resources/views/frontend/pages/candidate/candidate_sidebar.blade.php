@@ -8,7 +8,7 @@
                 <a href="candidate-applied-jobs.html">Applied Jobs</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-bookmarked-jobs.html">Bookmarked Jobs</a>
+                <a href="{{ route('bookmark.index') }}">Bookmarked Jobs</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ route('education.index') }}">Education</a>

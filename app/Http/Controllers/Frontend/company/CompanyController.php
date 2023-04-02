@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\company;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WebsiteEmail;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\CompanyFounded;
@@ -22,6 +23,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -95,7 +97,7 @@ class CompanyController extends Controller
             "phone" => $request->phone,
             "address" => $request->address,
             "website" => $request->website,
-            "country_location_id" => $request->company_country_id,
+            "company_location_id" => $request->company_country_id,
             "company_size_id" => $request->company_size_id,
             "company_founded_id" => $request->company_founded_id,
             "company_industry_id" => $request->company_industry_id,
@@ -504,6 +506,107 @@ class CompanyController extends Controller
             'alert-type' => 'success'
         ];
 
+        return redirect()->back()->with($notification);
+    }
+
+    public function companies(Request $request)
+    {
+        $companyLocation = CompanyLocation::all();
+        $companyIndustry = CompanyIndustry::all();
+        $companySize = CompanySize::all();
+        $companyFounded = CompanyFounded::all();
+
+        $name = $request->name;
+        $location = $request->location;
+        $size = $request->size;
+        $industry = $request->industry;
+        $founded = $request->founded;
+
+        $getCompanies = Company::with(
+            'location',
+            'size',
+            'industry',
+            'founded'
+        )->withCount('jobs')
+            ->latest('id');
+
+        if ($name != null) {
+            $getCompanies->where('company_name', 'LIKE', '%' . $name . '%');
+        }
+        if ($location != null) {
+            $getCompanies->where('company_location_id', $location);
+        }
+        if ($size != null) {
+            $getCompanies->where('company_size_id', $size);
+        }
+        if ($industry != null) {
+            $getCompanies->where('company_industry_id', $industry);
+        }
+        if ($founded != null) {
+            $getCompanies->where('company_founded_id', $founded);
+        }
+
+        $getCompanies = $getCompanies->paginate(6)->appends($request->all());
+
+        return view(
+            'frontend.pages.companies',
+            compact(
+                'companyLocation',
+                'companyIndustry',
+                'companySize',
+                'companyFounded',
+                'name',
+                'location',
+                'size',
+                'industry',
+                'founded',
+                'getCompanies'
+            )
+        );
+    }
+    public function companyDetail($slug)
+    {
+        $getCompany = Company::with(
+            'location',
+            'size',
+            'industry',
+            'founded',
+            'jobs'
+        )->withCount('jobs')
+            ->where('slug', $slug)
+            ->first();
+
+        $companyPhoto = CompanyPhoto::where('company_id', $getCompany->id)->get();
+        $companyVideo = CompanyVideo::where('company_id', $getCompany->id)->get();
+
+        return view('frontend.pages.company_detail', compact(
+            'getCompany',
+            'companyPhoto',
+            'companyVideo'
+        ));
+    }
+
+    public function companyContact(Request $request)
+    {
+        $request->validate([
+            'fullname' => ['required', 'max:255'],
+            'email' => ['required', 'max:255'],
+            'message' => ['required', 'max:255'],
+            'phone' => ['required', 'max:255'],
+        ]);
+
+        $subject = 'Visitor information: ' . $request->job_title;
+        $message = 'Name: ' . $request->fullname . '<br>';
+        $message .= 'Email: ' . $request->email . '<br>';
+        $message .= 'Phone: ' . $request->phone . '<br>';
+        $message .= 'Message: ' . $request->message . '<br>';
+
+        Mail::to($request->email)->send(new WebsiteEmail($subject, $message));
+
+        $notification = array(
+            'message' => 'Send Enquery Form Successfully.',
+            'alert-type' => 'success'
+        );
         return redirect()->back()->with($notification);
     }
 }

@@ -19,11 +19,11 @@
                             <a href="{{ url('/') }}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="jobs.html" class="nav-link">
+                            <a href="{{ url('jobs') }}" class="nav-link">
                                 Find Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a href="companies.html" class="nav-link">Companies</a>
+                            <a href="{{ url('companies') }}" class="nav-link">Companies</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('pricing') }}" class="nav-link">Pricing</a>

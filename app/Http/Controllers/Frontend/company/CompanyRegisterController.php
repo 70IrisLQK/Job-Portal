@@ -25,9 +25,11 @@ class CompanyRegisterController extends Controller
         ]);
 
         $token = Str::random(10);
+        $slug = Str::slug($request->company_name);
 
-        Company::create([
+        Company::updateOrCreate(['slug', $slug], [
             "company_name" => $request->company_name,
+            "slug" => $slug,
             "person_name" => $request->person_name,
             "username" => $request->username,
             "email" => $request->email,
