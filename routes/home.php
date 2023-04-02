@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\PrivacyController;
 use App\Http\Controllers\Frontend\RegisterController;
 use App\Http\Controllers\Frontend\TermController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\JobController;
 use Illuminate\Support\Facades\Route;
 
 // Route index
@@ -23,7 +24,9 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::get('/forget-password', [ForgetController::class, 'index']);
 
 // Route jobs
-Route::get('/jobs', [HomeController::class, 'jobs']);
+Route::get('/jobs', [JobController::class, 'jobs'])->name('jobs.listing');
+Route::get('/jobs/detail/{slug}', [JobController::class, 'jobDetail'])->name('jobs.detail');
+Route::post('/jobs/enquery/email', [JobController::class, 'jobSendmail'])->name('jobs.send_mail');
 
 // Route category
 Route::get('/categories', [CategoryController::class, 'index']);

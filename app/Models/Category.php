@@ -13,4 +13,14 @@ class Category extends Model
     protected $guard = [];
     protected $timestamp = false;
     protected $fillable = ['name', 'slug', 'icon', 'description', 'created_at', 'updated_at'];
+
+    /**
+     * Get all of the comments for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobs()
+    {
+        return $this->hasMany(Jobs::class, 'job_category_id');
+    }
 }

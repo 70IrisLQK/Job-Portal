@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $listCategories = Category::latest()->take(12)->get();
+        $listCategories = Category::withCount('jobs')->latest()->take(12)->get();
         $getCategory = PageCategory::first();
         return view('frontend.pages.categories', compact('getCategory', 'listCategories'));
     }
