@@ -11,10 +11,10 @@
                 <a href="{{ route('company.orders') }}">Orders</a>
             </li>
             <li class="list-group-item">
-                <a href="company-job-add.html">Create Job</a>
+                <a href="{{ route('company.create-job') }}">Create Job</a>
             </li>
             <li class="list-group-item">
-                <a href="company-jobs.html">All Jobs</a>
+                <a href="{{ route('company.jobs') }}">All Jobs</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ route('company.photos') }}">Photos</a>
@@ -24,6 +24,9 @@
             </li>
             <li class="list-group-item">
                 <a href="company-applications.html">Candidate Applications</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ route('company.edit-password') }}">Change Password</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ route('company.edit-profile') }}">Edit Profile</a>

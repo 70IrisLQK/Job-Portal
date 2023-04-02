@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\CompanyFounded;
 use App\Models\CompanyIndustry;
@@ -10,8 +11,14 @@ use App\Models\CompanyLocation;
 use App\Models\CompanyPhoto;
 use App\Models\CompanySize;
 use App\Models\CompanyVideo;
+use App\Models\Experience;
+use App\Models\Gender;
+use App\Models\JobLocation;
+use App\Models\Jobs;
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\Salary;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -277,6 +284,223 @@ class CompanyController extends Controller
 
         $notification = [
             'message' => 'Deleted Video Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function editPassword()
+    {
+        return view('frontend.pages.company.company_edit_password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'max:255', 'min:6'],
+            'confirm_password' => ['required', 'max:255', 'min:6', 'same:password'],
+        ]);
+
+        $getCompany = Company::find(Auth::guard('company')->user()->id);
+
+        $getCompany->password = Hash::make($request->password);
+        $getCompany->save();
+
+        $notification = [
+            'message' => 'Update Password Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function createJob()
+    {
+        $companyId = Auth::guard('company')->user()->id;
+
+        $getOrder = Order::where('company_id', $companyId)
+            ->where('currently_active', 1)->first();
+        $getPackage = Package::where('id', $getOrder->package_id)->first();
+        $existingJob = Jobs::where('company_id', $companyId)->count();
+
+        if ($getPackage->total_allowed_featured_jobs == $existingJob) {
+            $notification = array(
+                'message' => 'Maximum number of allowed jobs. So you have to upgrade your package if you want upload more job.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        $jobLocation = JobLocation::orderBy('name', 'asc')->get();
+        $jobCategory = Category::orderBy('name', 'asc')->get();
+        $jobType = Type::orderBy('name', 'asc')->get();
+        $jobExperience = Experience::orderBy('name', 'asc')->get();
+        $jobSalaryRange = Salary::orderBy('name', 'asc')->get();
+        $jobGender = Gender::orderBy('name', 'asc')->get();
+
+        return view(
+            'frontend.pages.company.company_job_add',
+            compact(
+                'jobLocation',
+                'jobCategory',
+                'jobType',
+                'jobExperience',
+                'jobSalaryRange',
+                'jobGender',
+            )
+        );
+    }
+
+    public function storeJob(Request $request)
+    {
+        $companyId = Auth::guard('company')->user()->id;
+
+        $getOrder = Order::where('company_id', $companyId)
+            ->where('currently_active', 1)->first();
+        $getPackage = Package::where('id', $getOrder->package_id)->first();
+        $existingVideo = Jobs::where('company_id', $companyId)->count();
+
+        if ($getPackage->total_allowed_featured_jobs == $existingVideo) {
+            $notification = array(
+                'message' => 'Maximum number of allowed job. So you have to upgrade your package if you want upload more job.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+
+        $request->validate([
+            "title" => ['required', 'max:255'],
+            "deadline" => ['required'],
+            "vacancy" => ['required', 'numeric'],
+            "category_id" => ['required'],
+            "location_id" => ['required'],
+            "type_id" => ['required'],
+            "experience_id" => ['required'],
+            "gender_id" => ['required'],
+            "salary_range_id" => ['required'],
+            "is_featured" => ['required'],
+            "is_urgent" => ['required'],
+        ]);
+
+        Jobs::updateOrCreate(
+            [
+                'slug' => Str::slug($request->title),
+            ],
+            [
+                'company_id' => $companyId,
+                'title' => $request->title,
+                'description' => $request->description,
+                'responsibility' => $request->responsibility,
+                'skill' => $request->skill,
+                'education' => $request->education,
+                'benefit' => $request->benefit,
+                'deadline' => $request->deadline,
+                'vacancy' => $request->vacancy,
+                'job_category_id' => $request->category_id,
+                'job_location_id' => $request->location_id,
+                'job_type_id' => $request->type_id,
+                'job_experience_id' => $request->experience_id,
+                'job_gender_id' => $request->gender_id,
+                'job_salary_range_id' => $request->salary_range_id,
+                'map_code' => $request->map_code,
+                'is_featured' => $request->is_featured,
+                'is_urgent' => $request->is_urgent,
+                'created_at' => time(),
+            ]
+        );
+
+        $notification = [
+            'message' => 'Create Job Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function jobs()
+    {
+        $listJobs = Jobs::with('category')->latest()->get();
+        return view('frontend.pages.company.company_all_jobs', compact('listJobs'));
+    }
+
+    public function editJob($id)
+    {
+        $getJobById = Jobs::find($id);
+        $jobLocation = JobLocation::orderBy('name', 'asc')->get();
+        $jobCategory = Category::orderBy('name', 'asc')->get();
+        $jobType = Type::orderBy('name', 'asc')->get();
+        $jobExperience = Experience::orderBy('name', 'asc')->get();
+        $jobSalaryRange = Salary::orderBy('name', 'asc')->get();
+        $jobGender = Gender::orderBy('name', 'asc')->get();
+        return view('frontend.pages.company.company_edit_jobs', compact(
+            'getJobById',
+            'jobLocation',
+            'jobCategory',
+            'jobType',
+            'jobExperience',
+            'jobSalaryRange',
+            'jobGender',
+        ));
+    }
+    public function updateJob(Request $request, $id)
+    {
+        $request->validate([
+            "title" => ['required', 'max:255'],
+            "deadline" => ['required'],
+            "vacancy" => ['required', 'numeric'],
+            "category_id" => ['required'],
+            "location_id" => ['required'],
+            "type_id" => ['required'],
+            "experience_id" => ['required'],
+            "gender_id" => ['required'],
+            "salary_range_id" => ['required'],
+            "is_featured" => ['required'],
+            "is_urgent" => ['required'],
+        ]);
+
+        $companyId = Auth::guard('company')->user()->id;
+
+        Jobs::updateOrCreate(
+            [
+                'id' => $id,
+                'slug' => Str::slug($request->title),
+            ],
+            [
+                'company_id' => $companyId,
+                'title' => $request->title,
+                'description' => $request->description,
+                'responsibility' => $request->responsibility,
+                'skill' => $request->skill,
+                'education' => $request->education,
+                'benefit' => $request->benefit,
+                'deadline' => $request->deadline,
+                'vacancy' => $request->vacancy,
+                'job_category_id' => $request->category_id,
+                'job_location_id' => $request->location_id,
+                'job_type_id' => $request->type_id,
+                'job_experience_id' => $request->experience_id,
+                'job_gender_id' => $request->gender_id,
+                'job_salary_range_id' => $request->salary_range_id,
+                'map_code' => $request->map_code,
+                'is_featured' => $request->is_featured,
+                'is_urgent' => $request->is_urgent,
+                'created_at' => time(),
+            ]
+        );
+
+        $notification = [
+            'message' => 'Create Job Successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+    public function destroyJob($id)
+    {
+        Jobs::destroy($id);
+
+        $notification = [
+            'message' => 'Deleted Job Successfully.',
             'alert-type' => 'success'
         ];
 

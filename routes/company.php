@@ -54,5 +54,17 @@ Route::prefix('company')->group(function () {
         Route::get('videos', [CompanyController::class, 'videos'])->name('company.videos');
         Route::post('videos/submit', [CompanyController::class, 'videoSubmit'])->name('company.videos-submit');
         Route::get('videos/delete/{id}', [CompanyController::class, 'videoDelete'])->name('company.videos-delete');
+
+        //Edit Password
+        Route::get('edit/password', [CompanyController::class, 'editPassword'])->name('company.edit-password');
+        Route::put('update/password', [CompanyController::class, 'updatePassword'])->name('company.update-password');
+
+        // Job route
+        Route::get('all/jobs', [CompanyController::class, 'jobs'])->name('company.jobs');
+        Route::get('jobs', [CompanyController::class, 'createJob'])->name('company.create-job');
+        Route::post('store/jobs', [CompanyController::class, 'storeJob'])->name('company.store-job');
+        Route::get('edit/jobs/{id}', [CompanyController::class, 'editJob'])->name('company.edit-job');
+        Route::put('update/jobs/{id}', [CompanyController::class, 'updateJob'])->name('company.update-job');
+        Route::get('destroy/jobs/{id}', [CompanyController::class, 'destroyJob'])->name('company.delete-job');
     });
 });

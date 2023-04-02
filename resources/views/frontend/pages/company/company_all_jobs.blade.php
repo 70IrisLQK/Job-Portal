@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Dashboard</h2>
+                    <h2>Payment</h2>
                 </div>
             </div>
         </div>
@@ -15,27 +15,6 @@
             <div class="row">
                 @include('frontend.pages.company.company_sidebar')
                 <div class="col-lg-9 col-md-12">
-                    <h3>{{ Auth::guard('company')->user()->name }}</h3>
-                    <p>See all the statistics at a glance:</p>
-
-                    <div class="row box-items">
-                        <div class="col-md-4">
-                            <div class="box1">
-                                <h4>{{ $totalOpenJob }}</h4>
-
-                                <p>Open Jobs</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="box3">
-                                <h4>{{ $totalFeaturedJob }}</h4>
-                                <p>Featured Jobs</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="mt-5">Recent Jobs</h3>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <tbody>
@@ -43,10 +22,10 @@
                                     <th>SL</th>
                                     <th>Job Title</th>
                                     <th>Category</th>
-                                    <th>Featured</th>
-                                    <th>Urgent</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
-                                @foreach ($getJobs as $job)
+                                @foreach ($listJobs as $job)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $job->title }}</td>
@@ -59,13 +38,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($job->is_urgent == 1)
-                                                <span class="badge bg-success">Featured</span>
-                                            @else
-                                                <span class="badge bg-danger">Not Featured</span>
-                                            @endif
+                                            <a href="{{ route('company.edit-job', [$job->id]) }}"
+                                                class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('company.delete-job', [$job->id]) }}"
+                                                class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');"><i
+                                                    class="fas fa-trash-alt"></i></a>
                                         </td>
-
                                     </tr>
                                 @endforeach
 
