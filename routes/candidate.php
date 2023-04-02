@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Frontend\candidate\CandidateAwardController;
 use App\Http\Controllers\Frontend\candidate\CandidateController;
+use App\Http\Controllers\Frontend\candidate\CandidateEducationController;
+use App\Http\Controllers\Frontend\candidate\CandidateExperienceController;
 use App\Http\Controllers\Frontend\candidate\CandidateForgerPasswordController;
 use App\Http\Controllers\Frontend\candidate\CandidateHomeController;
 use App\Http\Controllers\Frontend\candidate\CandidateLoginController;
 use App\Http\Controllers\Frontend\candidate\CandidateRegisterController;
+use App\Http\Controllers\Frontend\candidate\CandidateSkillController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -31,5 +35,17 @@ Route::prefix('candidate')->group(function () {
         //Password
         Route::get('edit/password', [CandidateController::class, 'editPassword'])->name('candidate_edit_password');
         Route::put('update/password', [CandidateController::class, 'updatePassword'])->name('candidate_update_password');
+
+        //Education
+        Route::resource('education', CandidateEducationController::class);
+
+        //Education
+        Route::resource('skill', CandidateSkillController::class);
+
+        //Education
+        Route::resource('experience', CandidateExperienceController::class);
+
+        //Education
+        Route::resource('award', CandidateAwardController::class);
     });
 });

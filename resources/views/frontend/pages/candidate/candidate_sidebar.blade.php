@@ -11,16 +11,16 @@
                 <a href="candidate-bookmarked-jobs.html">Bookmarked Jobs</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-education.html">Education</a>
+                <a href="{{ route('education.index') }}">Education</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-skill.html">Skills</a>
+                <a href="{{ route('skill.index') }}">Skills</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-experience.html">Work Experience</a>
+                <a href="{{ route('experience.index') }}">Work Experience</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-award.html">Awards</a>
+                <a href="{{ route('award.index') }}">Awards</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ route('candidate_edit_password') }}">Change Password</a>
