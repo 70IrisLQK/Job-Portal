@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\candidate\CandidateController;
 use App\Http\Controllers\Frontend\candidate\CandidateForgerPasswordController;
 use App\Http\Controllers\Frontend\candidate\CandidateHomeController;
 use App\Http\Controllers\Frontend\candidate\CandidateLoginController;
@@ -22,5 +23,13 @@ Route::prefix('candidate')->group(function () {
     Route::middleware(['candidate'])->group(function () {
         Route::get('dashboard', [CandidateHomeController::class, 'dashboard'])->name('candidate.dashboard');
         Route::post('logout', [CandidateLoginController::class, 'logout'])->name('candidate.logout');
+
+        // Profile
+        Route::get('edit/profile', [CandidateController::class, 'editProfile'])->name('candidate_edit_profile');
+        Route::put('update/profile/{id}', [CandidateController::class, 'updateProfile'])->name('candidate_update_profile');
+
+        //Password
+        Route::get('edit/password', [CandidateController::class, 'editPassword'])->name('candidate_edit_password');
+        Route::put('update/password', [CandidateController::class, 'updatePassword'])->name('candidate_update_password');
     });
 });
