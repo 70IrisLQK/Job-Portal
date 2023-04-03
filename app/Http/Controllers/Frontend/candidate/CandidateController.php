@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend\candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\CandidateApply;
 use App\Models\CandidateBookmark;
+use App\Models\Jobs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -121,7 +123,7 @@ class CandidateController extends Controller
         $existingBookmark = CandidateBookmark::where('candidate_id', $candidateId)->where('job_id', $id)->count();
         if ($existingBookmark > 0) {
             $notification = [
-                'message' => 'This Job already bookmark Successfully.',
+                'message' => 'This Job already bookmark.',
                 'alert-type' => 'error'
             ];
 
@@ -159,5 +161,52 @@ class CandidateController extends Controller
         ];
 
         return redirect()->back()->with($notification);
+    }
+
+    public function apply($id)
+    {
+        $candidateId = Auth::guard('candidate')->user()->id;
+
+        $existingBookmark = CandidateApply::where('candidate_id', $candidateId)
+            ->where('job_id', $id)->count();
+
+        if ($existingBookmark > 0) {
+            $notification = [
+                'message' => 'You have already apply on this job.',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+
+        $getJob = Jobs::find($id);
+        $jobId = $id;
+
+        return view('frontend.pages.apply', compact('jobId', 'getJob'));
+    }
+
+    public function applyStore(Request $request, $id)
+    {
+        CandidateApply::create([
+            'candidate_id' => Auth::guard('candidate')->user()->id,
+            'job_id' => $id,
+            'status' => 'Applied',
+            'cover_letter' => $request->cover_letter,
+        ]);
+
+        $getJob = Jobs::find($id);
+
+        $notification = [
+            'message' => 'Apply this job successfully.',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('jobs.detail', [$getJob->slug])->with($notification);
+    }
+
+    public function index()
+    {
+        $listCandidate = CandidateApply::with('job')->where('candidate_id', Auth::guard('candidate')->user()->id)->get();
+        return view('frontend.pages.candidate.candidate_applied_jobs', compact('listCandidate'));
     }
 }

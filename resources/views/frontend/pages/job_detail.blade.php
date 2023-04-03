@@ -40,12 +40,34 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="apply">
-                                @if (date('Y-m-d') > $getJob->deadline)
-                                    <a href="apply.html" class="btn btn-primary">Apply Now</a>
-                                @endif
-                                <a href="apply.html" class="btn btn-primary save-job">Bookmark</a>
-                            </div>
+                            @if (!Auth::guard('company')->user())
+                                <div class="apply">
+                                    @if (date('Y-m-d') <= $getJob->deadline)
+                                        <a href="{{ route('candidate.apply', [$getJob->id]) }}"
+                                            class="btn btn-primary">Apply Now</a>
+                                    @endif
+                                    <div class="bookmark">
+                                        @if (Auth::guard('candidate')->check())
+                                            @php
+                                                $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)
+                                                    ->where('job_id', $getJob->id)
+                                                    ->count();
+                                                if ($count > 0) {
+                                                    $bookmarkStatus = 'active';
+                                                } else {
+                                                    $bookmarkStatus = '';
+                                                }
+                                            @endphp
+                                        @else
+                                            @php
+                                                $bookmarkStatus = '';
+                                            @endphp
+                                        @endif
+                                        <a href="{{ route('candidate.bookmark', [$getJob->id]) }}"><i
+                                                class="fas fa-bookmark {{ $bookmarkStatus }}"></i></a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
