@@ -1,13 +1,14 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
-    <div class="page-top page-top-job-single page-top-company-single" style="background-image: url('uploads/banner.jpg')">
+    <div class="page-top page-top-job-single page-top-company-single"
+        style="background-image: url('{{ asset('upload/banner.jpg') }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 job job-single">
                     <div class="item d-flex justify-content-start">
                         <div class="logo">
-                            <img src="uploads/logo1.png" alt="" />
+                            <img src="{{ asset('upload/companies/' . $getCompany->logo) }}" alt="" />
                         </div>
                         <div class="text">
                             <h3>{{ $getCompany->company_name }}</h3>
@@ -188,7 +189,8 @@
                                         <div class="col-md-12">
                                             <div class="item d-flex justify-content-start">
                                                 <div class="logo">
-                                                    <img src="uploads/logo1.png" alt="" />
+                                                    <img src="{{ asset('upload/companies/' . $job->company->logo) }}"
+                                                        alt="" />
                                                 </div>
                                                 <div class="text">
                                                     <h3>
@@ -210,7 +212,7 @@
                                                         <div class="budget">
                                                             {{ $job->salary->name }}
                                                         </div>
-                                                        @if (date('Y-m-d') > $job->deadline)
+                                                        @if (date('Y-m-d') <= $job->deadline)
                                                             <div class="expired">
                                                                 Expired
                                                             </div>
@@ -225,7 +227,7 @@
                                                         <div class="type">
                                                             {{ $job->type->name }}
                                                         </div>
-                                                        @if ($job->urgent == 1)
+                                                        @if ($job->is_urgent == 1)
                                                             <div class="urgent">
                                                                 Urgent
                                                             </div>
@@ -251,7 +253,7 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <td><b> Contact Person:</b></td>
-                                        <td>{{ $getCompany->contact_person }}</td>
+                                        <td>{{ $getCompany->person_name }}</td>
                                     </tr>
                                     <tr>
                                         <td><b> Category:</b></td>
@@ -259,11 +261,11 @@
                                     </tr>
                                     <tr>
                                         <td><b>Email:</b></td>
-                                        <td>$getCompany->email</td>
+                                        <td>{{ $getCompany->email }}</td>
                                     </tr>
                                     <tr>
                                         <td><b>Phone:</b></td>
-                                        <td>$getCompany->phone</td>
+                                        <td>{{ $getCompany->phone }}</td>
                                     </tr>
                                     <tr>
                                         <td><b>Address:</b></td>
@@ -273,7 +275,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Country:</b></td>
-                                        <td>{{ $getCompany->country }}</td>
+                                        <td>{{ $getCompany->location->name }}</td>
                                     </tr>
                                     <tr>
                                         <td><b>Website:</b></td>

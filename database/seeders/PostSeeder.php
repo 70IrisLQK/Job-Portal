@@ -17,8 +17,8 @@ class PostSeeder extends Seeder
     {
         $posts = [
             [
-                'title' => 'title',
-                'slug' => 'title',
+                'title' => 'This is a sample blog post title',
+                'slug' => 'this-is-a-sample-blog-post-title',
                 'short_description' => 'Lorem ipsum dolor sit amet, nibh saperet te pri, at nam diceret disputationi. Quo an consul impedit, usu possim evertitur dissentiet ei.',
                 'description' => '
                 <p>Lorem ipsum dolor sit amet, eos ea dolor commune iudicabit. In dicant dolore adversarium vix. Sed ei magna diceret, id mei possit maiestatis. Iusto detraxit perpetua vis no, duo ea esse adversarium. Eloquentiam reprehendunt et mea, molestie recusabo consetetur at vix.</p>
@@ -29,8 +29,8 @@ class PostSeeder extends Seeder
                 'image' => 'banner1.jpg'
             ],
             [
-                'title' => 'title3',
-                'slug' => 'title3',
+                'title' => 'This is a sample blog post',
+                'slug' => 'this-is-a-sample-blog-post',
                 'short_description' => 'Lorem ipsum dolor sit amet, nibh saperet te pri, at nam diceret disputationi. Quo an consul impedit, usu possim evertitur dissentiet ei.',
                 'description' => '
                 <p>Lorem ipsum dolor sit amet, eos ea dolor commune iudicabit. In dicant dolore adversarium vix. Sed ei magna diceret, id mei possit maiestatis. Iusto detraxit perpetua vis no, duo ea esse adversarium. Eloquentiam reprehendunt et mea, molestie recusabo consetetur at vix.</p>
@@ -41,8 +41,8 @@ class PostSeeder extends Seeder
                 'image' => 'banner3.jpg'
             ],
             [
-                'title' => 'title1',
-                'slug' => 'title1',
+                'title' => 'This is a sample blog',
+                'slug' => 'this-is-a-sample-blog',
                 'short_description' => 'Lorem ipsum dolor sit amet, nibh saperet te pri, at nam diceret disputationi. Quo an consul impedit, usu possim evertitur dissentiet ei.',
                 'description' => '
                 <p>Lorem ipsum dolor sit amet, eos ea dolor commune iudicabit. In dicant dolore adversarium vix. Sed ei magna diceret, id mei possit maiestatis. Iusto detraxit perpetua vis no, duo ea esse adversarium. Eloquentiam reprehendunt et mea, molestie recusabo consetetur at vix.</p>

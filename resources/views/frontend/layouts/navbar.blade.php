@@ -15,26 +15,26 @@
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                             <a href="{{ url('/') }}" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('jobs') ? 'active' : '' }}">
                             <a href="{{ url('jobs') }}" class="nav-link">
                                 Find Jobs</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('companies') ? 'active' : '' }}">
                             <a href="{{ url('companies') }}" class="nav-link">Companies</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('pricing') ? 'active' : '' }}">
                             <a href="{{ url('pricing') }}" class="nav-link">Pricing</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('faqs') ? 'active' : '' }}">
                             <a href="{{ url('faqs') }}" class="nav-link">FAQ</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('blogs') ? 'active' : '' }}">
                             <a href="{{ url('blogs') }}" class="nav-link">Blog</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('contacts') ? 'active' : '' }}">
                             <a href="{{ url('contacts') }}" class="nav-link">Contact</a>
                         </li>
                     </ul>

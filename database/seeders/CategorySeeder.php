@@ -18,48 +18,55 @@ class CategorySeeder extends Seeder
         $categories = [
             [
                 'name' => 'Education',
-                'slug' => 'education',
                 'icon' => 'fas fa-user-graduate'
             ],
             [
                 'name' => 'Commercial',
-                'slug' => 'commercial',
-                'icon' => 'fas fa-suitcase'
-            ],
-            [
-                'name' => 'Commercial',
-                'slug' => 'commercial',
                 'icon' => 'fas fa-suitcase'
             ],
             [
                 'name' => 'Accounting',
-                'slug' => 'accounting',
                 'icon' => 'fas fa-landmark'
             ],
             [
                 'name' => 'Engineering',
-                'slug' => 'engineering',
                 'icon' => 'fas fa-magic'
             ],
             [
                 'name' => 'Medical',
-                'slug' => 'medical',
                 'icon' => 'fas fa-stethoscope'
             ],
             [
                 'name' => 'Production',
-                'slug' => 'production',
                 'icon' => 'fas fa-sitemap'
             ],
             [
                 'name' => 'Data Entry',
-                'slug' => 'data-entry',
                 'icon' => 'fas fa-share-alt'
             ],
             [
                 'name' => 'Marketing',
-                'slug' => 'marketing',
                 'icon' => 'fas fa-bullhorn'
+            ],
+            [
+                'name' => 'Security',
+                'icon' => 'fas fa-lock'
+            ],
+            [
+                'name' => 'Garments',
+                'icon' => 'fas fa-users'
+            ],
+            [
+                'name' => 'Telecommunication',
+                'icon' => 'fas fa-vector-square'
+            ],
+            [
+                'name' => 'Telecommunication',
+                'icon' => 'fas fa-vector-square'
+            ],
+            [
+                'name' => 'Technician',
+                'icon' => 'fas fa-street-view'
             ],
         ];
         foreach ($categories as  $category) {

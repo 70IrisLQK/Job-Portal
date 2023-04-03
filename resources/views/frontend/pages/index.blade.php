@@ -173,7 +173,7 @@
                                     <div class="date">{{ $job->created_at->diffForHumans() }}
                                     </div>
                                     <div class="budget">{{ $job->salary->name }}</div>
-                                    @if (date('Y-m-d') > $job->deadline)
+                                    @if (date('Y-m-d') <= $job->deadline)
                                         <div class="expired">
                                             Expired
                                         </div>
@@ -188,7 +188,7 @@
                                     <div class="type">
                                         {{ $job->type->name }}
                                     </div>
-                                    @if ($job->urgent == 1)
+                                    @if ($job->is_urgent == 1)
                                         <div class="urgent">
                                             Urgent
                                         </div>
@@ -292,7 +292,7 @@
                             </div>
                             <div class="text">
                                 <h2>
-                                    <a href="{{ route('blogs.show', [$item->id]) }}">{{ $item->title }}</a>
+                                    <a href="{{ route('blogs.show', [$item->slug]) }}">{{ $item->title }}</a>
                                 </h2>
                                 <div class="short-des">
                                     <p>
@@ -300,7 +300,7 @@
                                     </p>
                                 </div>
                                 <div class="button">
-                                    <a href="{{ route('blogs.show', [$item->id]) }}" class="btn btn-primary">Read
+                                    <a href="{{ route('blogs.show', [$item->slug]) }}" class="btn btn-primary">Read
                                         More</a>
                                 </div>
                             </div>

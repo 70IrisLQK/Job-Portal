@@ -21,7 +21,7 @@
                             </div>
                             <div class="text">
                                 <h2>
-                                    <a href="{{ route('blogs.show', [$blog->id]) }}">{{ $blog->title }}</a>
+                                    <a href="{{ route('blogs.show', [$blog->slug]) }}">{{ $blog->title }}</a>
                                 </h2>
                                 <div class="short-des">
                                     <p>
@@ -29,7 +29,7 @@
                                     </p>
                                 </div>
                                 <div class="button">
-                                    <a href="{{ route('blogs.show', [$blog->id]) }}" class="btn btn-primary">Read More</a>
+                                    <a href="{{ route('blogs.show', [$blog->slug]) }}" class="btn btn-primary">Read More</a>
                                 </div>
                             </div>
                         </div>

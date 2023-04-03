@@ -15,9 +15,9 @@ class BlogController extends Controller
         return view('frontend.pages.blogs', compact('listBlogs', 'getPageBlog'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $getPostById = Post::find($id);
+        $getPostById = Post::where("slug", $slug)->first();
         return view('frontend.pages.post', compact('getPostById'));
     }
 }

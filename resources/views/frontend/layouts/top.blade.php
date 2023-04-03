@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-6 left-side">
                 <ul>
-                    <li class="phone-text">111-222-3333</li>
-                    <li class="email-text">contact@arefindev.com</li>
+                    <li class="phone-text">099-999-9999</li>
+                    <li class="email-text">khanhlam.dev@gmail.com</li>
                 </ul>
             </div>
             <div class="col-md-6 right-side">

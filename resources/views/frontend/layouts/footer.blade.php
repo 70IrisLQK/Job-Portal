@@ -32,20 +32,20 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="right">
-                            34 Antiger Lane, USA, 12937
+                            01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 70000
                         </div>
                     </div>
                     <div class="list-item">
                         <div class="left">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <div class="right">contact@arefindev.com</div>
+                        <div class="right">contact@khanhlamdev.com</div>
                     </div>
                     <div class="list-item">
                         <div class="left">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <div class="right">122-222-1212</div>
+                        <div class="right">099-999-9999</div>
                     </div>
                     <ul class="social">
                         <li>
@@ -69,19 +69,7 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="item">
-                    <h2 class="heading">Newsletter</h2>
-                    <p>
-                        To get the latest news from our website, please
-                        subscribe us here:
-                    </p>
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <input type="text" name="" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Subscribe Now" />
-                        </div>
-                    </form>
+
                 </div>
             </div>
         </div>

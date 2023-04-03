@@ -43,7 +43,7 @@ Route::get('/faqs', [FAQController::class, 'index']);
 
 // Route blogs
 Route::get('/blogs', [BlogController::class, 'index']);
-Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 
 // Route terms
 Route::get('/terms', [TermController::class, 'index']);

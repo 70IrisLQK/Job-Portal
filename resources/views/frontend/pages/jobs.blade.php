@@ -1,6 +1,6 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
-    <div class="page-top" style="background-image: url('uploads/banner.jpg')">
+    <div class="page-top" style="background-image: url('{{ asset('upload/banner.jpg') }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
@@ -19,7 +19,7 @@
                         <form method="get" action="{{ route('jobs.listing') }}">
                             <div class="widget">
                                 <h2>Job Title</h2>
-                                <input type="text" name="" value="{{ $title }}" class="form-control"
+                                <input type="text" name="title" value="{{ $title }}" class="form-control"
                                     placeholder="Search Titles ..." />
                             </div>
 
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="filter-button">
-                                <button type="submit" class="btn btn-sm">
+                                <button type="submit" class="btn btn-primary btn-sm">
                                     <i class="fas fa-search"></i> Filter
                                 </button>
                             </div>
@@ -107,10 +107,20 @@
                                         Result for Job Listing
                                     </div>
                                 </div>
+
                                 @if (!$getJobs->count())
                                     <div class="text-danger">No result data found</div>
                                 @else
                                     @foreach ($getJobs as $job)
+                                        {{-- @php
+                                            $companyId = $job->company->id;
+                                            $orderData = \App\Models\Order::where('company_id', $companyId)
+                                                ->where('currently_active', 1)
+                                                ->first();
+                                            if (date('Y-m-d') > $orderData->expire_date) {
+                                                continue;
+                                            }
+                                        @endphp --}}
                                         <div class="col-md-12">
                                             <div class="item d-flex justify-content-start">
                                                 <div class="logo">
@@ -138,7 +148,7 @@
                                                         <div class="budget">
                                                             {{ $job->salary->name }}
                                                         </div>
-                                                        @if (date('Y-m-d') > $job->deadline)
+                                                        @if (date('Y-m-d') <= $job->deadline)
                                                             <div class="expired">
                                                                 Expired
                                                             </div>
@@ -153,7 +163,7 @@
                                                         <div class="type">
                                                             {{ $job->type->name }}
                                                         </div>
-                                                        @if ($job->urgent == 1)
+                                                        @if ($job->is_urgent == 1)
                                                             <div class="urgent">
                                                                 Urgent
                                                             </div>
@@ -186,10 +196,11 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    <div class="col-md-12 d-flex">
+                                        {{ $getJobs->appends($_GET)->links() }}
+                                    </div>
                                 @endif
-                                <div class="col-md-12">
-                                    {{ $getJobs->appends($_GET)->links() }}
-                                </div>
+
                             </div>
                         </div>
                     </div>

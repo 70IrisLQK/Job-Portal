@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright">
-                        Copyright 2022, ArefinDev. All Rights Reserved.
+                        Copyright 2022, khanhlam.dev@gmail.com. All Rights Reserved.
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">

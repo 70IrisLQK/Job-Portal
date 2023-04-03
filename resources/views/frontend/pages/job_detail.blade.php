@@ -159,7 +159,7 @@
                                                         <div class="date">{{ $job->created_at->diffForHumans() }}
                                                         </div>
                                                         <div class="budget">{{ $job->salary->name }}</div>
-                                                        @if (date('Y-m-d') > $job->deadline)
+                                                        @if (date('Y-m-d') <= $job->deadline)
                                                             <div class="expired">
                                                                 Expired
                                                             </div>
@@ -174,7 +174,7 @@
                                                         <div class="type">
                                                             {{ $job->type->name }}
                                                         </div>
-                                                        @if ($job->urgent == 1)
+                                                        @if ($job->is_urgent == 1)
                                                             <div class="urgent">
                                                                 Urgent
                                                             </div>
