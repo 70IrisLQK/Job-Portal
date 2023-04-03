@@ -22,4 +22,9 @@ class CandidateApply extends Model
     {
         return $this->belongsTo(Jobs::class);
     }
+
+    public function candidate()
+    {
+        return $this->belongsTo(Candidate::class);
+    }
 }

@@ -69,6 +69,10 @@
                             href="{{ route('admin.page-pricing') }}"><i class="fas fa-angle-right"></i>
                             Page Pricing </a></li>
 
+                    <li class="{{ Request::is('admin/page/advertisement') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.advertisement') }}"><i class="fas fa-angle-right"></i>
+                            Advertisement </a></li>
+
                     <li class="{{ Request::is('admin/page/other-item') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.other-item') }}"><i class="fas fa-angle-right"></i>
                             Page Other Item </a></li>

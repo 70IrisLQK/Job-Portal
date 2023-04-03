@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\crud\AdminAdvertisementController;
 use App\Http\Controllers\Admin\crud\AdminCategoryController;
 use App\Http\Controllers\Admin\crud\AdminCompanyFoundedController;
 use App\Http\Controllers\Admin\crud\AdminCompanyIndustryController;
@@ -86,6 +87,9 @@ Route::prefix('admin')->group(function () {
         //Page Pricing
         Route::get('page/other-item', [AdminOtherItemsController::class, 'edit'])->name('admin.other-item');
         Route::put('page/other-item/{id}', [AdminOtherItemsController::class, 'update'])->name('admin.update-other-item');
+        //Page Advertisement
+        Route::get('page/advertisement', [AdminAdvertisementController::class, 'edit'])->name('admin.advertisement');
+        Route::put('page/advertisement/{id}', [AdminAdvertisementController::class, 'update'])->name('admin.update-advertisement');
 
         // Category route
         Route::resource('categories', AdminCategoryController::class);

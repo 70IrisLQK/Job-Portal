@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\candidate;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WebsiteEmail;
 use App\Models\Candidate;
 use App\Models\CandidateApply;
 use App\Models\CandidateBookmark;
@@ -10,6 +11,7 @@ use App\Models\Jobs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -194,7 +196,16 @@ class CandidateController extends Controller
             'cover_letter' => $request->cover_letter,
         ]);
 
-        $getJob = Jobs::find($id);
+        $getJob = Jobs::with('company')->find($id);
+        $companyEmail = $getJob->company->email;
+        // Send link
+        $resetLink = route('company.application', $id);
+
+        $subject = 'A person applied for this job';
+        $message = 'Please check the application: <br>';
+        $message .= '<a href="' . $resetLink . '">Click here!</a>';
+
+        Mail::to($companyEmail)->send(new WebsiteEmail($subject, $message));
 
         $notification = [
             'message' => 'Apply this job successfully.',

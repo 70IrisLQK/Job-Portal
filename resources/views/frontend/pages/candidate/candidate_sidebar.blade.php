@@ -5,7 +5,7 @@
                 <a href="candidate-dashboard.html">Dashboard</a>
             </li>
             <li class="list-group-item">
-                <a href="candidate-applied-jobs.html">Applied Jobs</a>
+                <a href="{{ route('apply.index') }}">Applied Jobs</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ route('bookmark.index') }}">Bookmarked Jobs</a>

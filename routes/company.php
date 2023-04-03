@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\company\CompanyApplicationController;
 use App\Http\Controllers\Frontend\company\CompanyController;
 use App\Http\Controllers\Frontend\company\CompanyForgerPasswordController;
 use App\Http\Controllers\Frontend\company\CompanyHomeController;
@@ -66,5 +67,10 @@ Route::prefix('company')->group(function () {
         Route::get('edit/jobs/{id}', [CompanyController::class, 'editJob'])->name('company.edit-job');
         Route::put('update/jobs/{id}', [CompanyController::class, 'updateJob'])->name('company.update-job');
         Route::get('destroy/jobs/{id}', [CompanyController::class, 'destroyJob'])->name('company.delete-job');
+
+        // Application route
+        Route::get('application', [CompanyApplicationController::class, 'index'])->name('company.application');
+        Route::get('application/detail/{id}', [CompanyApplicationController::class, 'applicationDetail'])->name('application.detail');
+        Route::post('application/change-status', [CompanyApplicationController::class, 'applicationChangeStatus'])->name('application.change-status');
     });
 });
