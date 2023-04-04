@@ -25,9 +25,11 @@ class DatabaseSeeder extends Seeder
             PageFAQSeeder::class,
             PageBlogSeeder::class,
             PageTermSeeder::class,
+            PageCompanySeeder::class,
             PagePrivacySeeder::class,
             PageContactSeeder::class,
             PageCategorySeeder::class,
+            PageJobSeeder::class,
             PackageSeeder::class,
             PagePricingSeeder::class,
             OtherItemsSeeder::class,
@@ -43,6 +45,8 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             SalarySeeder::class,
             JobSeeder::class,
+            FAQSeeder::class,
+            AdvertisementSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

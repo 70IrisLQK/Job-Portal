@@ -11,7 +11,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('frontend/imgs/logo.png') }}" alt="" />
+                    <img src="{{ asset('upload/logo.png') }}" alt="" />
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">

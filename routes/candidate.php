@@ -60,7 +60,7 @@ Route::prefix('candidate')->group(function () {
 
         // Apply route
         Route::get('apply', [CandidateController::class, 'index'])->name('apply.index');
-        Route::get('apply/{id}', [CandidateController::class, 'apply'])->name('candidate.apply');
-        Route::post('apply/store/{id}', [CandidateController::class, 'applyStore'])->name('apply.store');
+        Route::get('apply/{slug}', [CandidateController::class, 'apply'])->name('candidate.apply');
+        Route::post('apply/store/{slug}', [CandidateController::class, 'applyStore'])->name('apply.store');
     });
 });

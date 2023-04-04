@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class AdminPageContactController extends Controller
 {
-    public const PUBLIC_PATH = 'upload/contacts/';
+    public const PUBLIC_PATH = 'upload/';
 
     public function pageContact()
     {
@@ -24,7 +24,8 @@ class AdminPageContactController extends Controller
         $request->validate([
             'title' => ['required', 'max:100'],
             'map_code' => ['required'],
-            'description' => ['required', 'max:255'],
+            'seo_title' => ['max:255'],
+            'seo_description' => ['max:255'],
             'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:1000']
         ]);
 
@@ -49,6 +50,8 @@ class AdminPageContactController extends Controller
                 'map_code' => $request->map_code,
                 'description' => $request->description,
                 'image' => $pathName,
+                'seo_title' => $request->seo_title,
+                'seo_description' => $request->seo_description,
                 'updated_at' => Carbon::now()
             ]
         );

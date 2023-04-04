@@ -5,10 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <meta name="description" content="" />
-    <title>Job Hunt</title>
+    {!! SEOMeta::generate() !!}
+    {!! OpenGraph::generate() !!}
+    {!! Twitter::generate() !!}
+    {!! JsonLd::generate() !!}
 
-    <link rel="icon" type="image/png" href="{{ asset('frontend/imgs/favicon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('upload/favicon.ico') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- All CSS -->

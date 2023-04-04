@@ -17,8 +17,10 @@ class PageCategorySeeder extends Seeder
     {
         $pageCategory = [
             'title' => 'Job Categories',
-            'description' => 'Job Categories',
-            'image' => 'no_image.jpg',
+            'image' => 'banner2.jpg',
+            'seo_title' => 'Jobs in Ho Chi Minh & Ha Noi | FindJob',
+            'seo_description' => '1000 top IT jobs for you in Ho Chi Minh | Ha Noi | Da Nang on FindJob.com. Leading companies, high salary. Get your new job now!',
+            'seo_image' => 'seo_image.png',
         ];
 
         PageCategory::updateOrCreate($pageCategory);

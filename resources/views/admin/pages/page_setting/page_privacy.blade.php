@@ -30,9 +30,19 @@
                                             <input type="file" class="form-control mt_10" name="image" id="image">
                                         </div>
                                         <div class="col-3">
-                                            <img src="{{ asset('upload/privacies/' . $getPrivacy->image) }}" alt=""
+                                            <img src="{{ asset('upload/' . $getPrivacy->image) }}" alt=""
                                                 class="profile-photo w_100_p" id="show_image">
                                             <label class="form-label"></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Seo Title</label>
+                                            <input type="text" class="form-control" name="seo_title"
+                                                value="{{ $getPrivacy->seo_title }}">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Seo Descriptiion</label>
+                                            <input type="text" class="form-control" name="seo_description"
+                                                value="{{ $getPrivacy->seo_description }}">
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label"></label>

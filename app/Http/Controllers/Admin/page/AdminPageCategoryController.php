@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class AdminPageCategoryController extends Controller
 {
-    public const PUBLIC_PATH = 'upload/categories/';
+    public const PUBLIC_PATH = 'upload/';
 
     public function pageCategory()
     {
@@ -23,7 +23,8 @@ class AdminPageCategoryController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:100'],
-            'description' => ['required', 'max:255'],
+            'seo_title' => ['max:255'],
+            'seo_description' => ['max:255'],
             'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:1000']
         ]);
 
@@ -45,7 +46,8 @@ class AdminPageCategoryController extends Controller
         $getCategory->update(
             [
                 'title' => $request->title,
-                'description' => $request->description,
+                'seo_title' => $request->seo_title,
+                'seo_description' => $request->seo_description,
                 'image' => $pathName,
                 'updated_at' => Carbon::now()
             ]

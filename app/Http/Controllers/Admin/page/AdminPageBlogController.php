@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class PageBlogController extends Controller
+class AdminPageBlogController extends Controller
 {
-    public const PUBLIC_PATH = 'upload/posts/';
+    public const PUBLIC_PATH = 'upload/';
 
     public function pageBlog()
     {
@@ -23,8 +23,9 @@ class PageBlogController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:100'],
-            'description' => ['required', 'max:255'],
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:1000']
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:1000'],
+            'seo_title' => ['max:255'],
+            'seo_description' => ['max:255'],
         ]);
 
         $getBlog = PageBlog::findOrFail($id);
@@ -33,7 +34,7 @@ class PageBlogController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $pathName = Str::uuid() . '.' . $image->getClientOriginalExtension();
-            $path = public_path(PageBlogController::PUBLIC_PATH);
+            $path = public_path(AdminPageBlogController::PUBLIC_PATH);
             Image::make($image)->resize(1300, 866)->save($path . $pathName);
 
             $imageExist = $getBlog->image;
@@ -45,7 +46,8 @@ class PageBlogController extends Controller
         $getBlog->update(
             [
                 'title' => $request->title,
-                'description' => $request->description,
+                'seo_title' => $request->seo_title,
+                'seo_description' => $request->seo_description,
                 'image' => $pathName,
                 'updated_at' => Carbon::now()
             ]

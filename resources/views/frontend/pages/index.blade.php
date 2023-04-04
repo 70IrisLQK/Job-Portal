@@ -155,12 +155,13 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="item d-flex justify-content-start">
                             <div class="logo">
-                                <img src="{{ asset('frontend/imgs/logo1.png') }}" alt="" />
+                                <img src="{{ asset('upload/companies/' . $job->company->logo) }}" alt="" />
                             </div>
                             <div class="text">
                                 <h3>
-                                    <a href="{{ route('jobs.detail', [$job->slug]) }}">{{ $job->name }}</a>
+                                    <a href="{{ route('jobs.detail', [$job->slug]) }}">{{ $job->title }}</a>
                                 </h3>
+
                                 <div class="detail-1 d-flex justify-content-start">
                                     <div class="category">
                                         {{ $job->category->name }}
@@ -173,7 +174,7 @@
                                     <div class="date">{{ $job->created_at->diffForHumans() }}
                                     </div>
                                     <div class="budget">{{ $job->salary->name }}</div>
-                                    @if (date('Y-m-d') <= $job->deadline)
+                                    @if (date('Y-m-d') > $job->deadline)
                                         <div class="expired">
                                             Expired
                                         </div>

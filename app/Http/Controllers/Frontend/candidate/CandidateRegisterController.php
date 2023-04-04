@@ -42,12 +42,11 @@ class CandidateRegisterController extends Controller
         Mail::to($request->email)->send(new WebsiteEmail($subject, $message));
 
         $notification = [
-            'message' => 'An email sent to your email.
-            You must have to check and click on the confirm link to verify account',
-            'alert-type' => 'success',
+            'message' => 'Register successfully. Please check mail to verify account',
+            'alert-type' => 'success'
         ];
 
-        return redirect('login')->with($notification);
+        return redirect('/login')->with($notification);
     }
 
     public function verifyAccount($token, $email)

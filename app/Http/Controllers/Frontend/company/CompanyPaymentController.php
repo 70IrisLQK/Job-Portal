@@ -22,7 +22,9 @@ class CompanyPaymentController extends Controller
 
     public function orders()
     {
-        $listOrders = Order::with('package')->latest()->get();
+        $companyId = Auth::guard('company')->user()->id;
+        $listOrders = Order::with('package')
+            ->where('company_id', $companyId)->latest()->get();
         return view(
             'frontend.pages.company.company_orders',
             compact('listOrders')

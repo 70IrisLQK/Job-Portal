@@ -1,11 +1,11 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
-    <div class="page-top" style="background-image: url('{{ asset('upload/categories/' . $getCategory->image) }}')">
+    <div class="page-top" style="background-image: url('{{ asset('upload/' . $pageCategory->image) }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{ $getCategory->title }}</h2>
+                    <h2>{{ $pageCategory->title }}</h2>
                 </div>
             </div>
         </div>

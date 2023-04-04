@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Dashboard</h2>
+                    <h2>Resume List</h2>
                 </div>
             </div>
         </div>
@@ -18,41 +18,49 @@
                     <a href="{{ route('resume.create') }}" class="btn btn-primary btn-sm mb-2"><i class="fas fa-plus"></i>
                         Add
                         Item</a>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th>SL</th>
-                                    <th>Name</th>
-                                    <th>File</th>
-                                    <th>Action</th>
-                                </tr>
-                                @foreach ($listResume as $resume)
+                    @if (!$listResume->count())
+                        <div>
+                            <span class="text-danger">
+                                No result data found
+                            </span>
+                        </div>
+                    @else
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $resume->name }}</td>
-                                        <td>
-                                            <a href="{{ url('upload/resumes/' . $resume->file) }}"
-                                                target="_blank">{{ $resume->file }}</a>
-                                        </td>
-                                        <td class="d-flex">
-                                            <a href="{{ route('resume.edit', [$resume->id]) }}"
-                                                class="btn btn-warning btn-sm text-white mx-1"><i
-                                                    class="fas fa-edit"></i></a>
-                                            <form action="{{ route('resume.destroy', [$resume->id]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#" class="btn btn-danger btn-sm"
-                                                    onClick="event.preventDefault(); this.closest('form').submit();return confirm('Do you want to delete it')"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                            </form>
-                                        </td>
+                                        <th>SL</th>
+                                        <th>Name</th>
+                                        <th>File</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
+                                    @foreach ($listResume as $resume)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $resume->name }}</td>
+                                            <td>
+                                                <a href="{{ url('upload/resumes/' . $resume->file) }}"
+                                                    target="_blank">{{ $resume->file }}</a>
+                                            </td>
+                                            <td class="d-flex">
+                                                <a href="{{ route('resume.edit', [$resume->id]) }}"
+                                                    class="btn btn-warning btn-sm text-white mx-1"><i
+                                                        class="fas fa-edit"></i></a>
+                                                <form action="{{ route('resume.destroy', [$resume->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#" class="btn btn-danger btn-sm"
+                                                        onClick="event.preventDefault(); this.closest('form').submit();return confirm('Do you want to delete it')"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('page_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
-            $table->text('description')->nullable();
-            $table->text('map_code');
+            $table->string('title');
             $table->string('image');
+            $table->text('map_code');
+            $table->string('seo_title');
+            $table->string('seo_description');
+            $table->string('seo_image');
             $table->softDeletes();
             $table->timestamps();
         });

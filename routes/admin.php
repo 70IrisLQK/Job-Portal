@@ -25,7 +25,7 @@ use App\Http\Controllers\Admin\page\AdminPageFAQController;
 use App\Http\Controllers\Admin\page\AdminPagePricingController;
 use App\Http\Controllers\Admin\page\AdminPagePrivacyController;
 use App\Http\Controllers\Admin\page\AdminPageTermController;
-use App\Http\Controllers\Admin\page\PageBlogController;
+use App\Http\Controllers\Admin\page\AdminPageBlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -67,8 +67,8 @@ Route::prefix('admin')->group(function () {
         Route::get('page/faqs', [AdminPageFAQController::class, 'pageFAQ'])->name('admin.page-faqs');
         Route::put('page/faqs/{id}', [AdminPageFAQController::class, 'updatePageFAQ'])->name('admin.update-page-faqs');
         //Page Blogs
-        Route::get('page/blogs', [PageBlogController::class, 'pageBlog'])->name('admin.page-blogs');
-        Route::put('page/blogs/{id}', [PageBlogController::class, 'updatePageBlog'])->name('admin.update-page-blogs');
+        Route::get('page/blogs', [AdminPageBlogController::class, 'pageBlog'])->name('admin.page-blogs');
+        Route::put('page/blogs/{id}', [AdminPageBlogController::class, 'updatePageBlog'])->name('admin.update-page-blogs');
         //Page Blogs
         Route::get('page/terms', [AdminPageTermController::class, 'pageTerm'])->name('admin.page-terms');
         Route::put('page/terms/{id}', [AdminPageTermController::class, 'updatePageTerm'])->name('admin.update-page-terms');

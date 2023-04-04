@@ -15,7 +15,7 @@
             <div class="row">
                 @include('frontend.pages.candidate.candidate_sidebar')
                 <div class="col-lg-9 col-md-12">
-                    <h3>Hello, {{ Auth::guard('candidate')->user()->id }}</h3>
+                    <h3>Hello, {{ Auth::guard('candidate')->user()->name }}</h3>
                     <p>See all the statistics at a glance:</p>
 
                     <div class="row box-items">

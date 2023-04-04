@@ -13,5 +13,12 @@ class PageContact extends Model
     protected $table = 'page_contacts';
     protected $guard = [];
     protected $timestamp = false;
-    protected $fillable = ['title', 'description', 'map_code', 'image', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'title',
+        'seo_description',
+        'seo_title',
+        'map_code',
+        'image',
+        'created_at', 'updated_at'
+    ];
 }

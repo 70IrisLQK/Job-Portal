@@ -21,18 +21,25 @@
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ $getFAQ->title }}">
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Description *</label>
-                                            <textarea rows="4" type="text" class="form-control" name="description">{{ $getFAQ->description }}</textarea>
-                                        </div>
+
                                         <div class="mb-4">
                                             <label class="form-label">FAQ Background *</label>
                                             <input type="file" class="form-control mt_10" name="image" id="image">
                                         </div>
                                         <div class="col-3">
-                                            <img src="{{ asset('upload/faqs/' . $getFAQ->image) }}" alt=""
+                                            <img src="{{ asset('upload/' . $getFAQ->image) }}" alt=""
                                                 class="profile-photo w_100_p" id="show_image">
                                             <label class="form-label"></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Seo Title</label>
+                                            <input type="text" class="form-control" name="seo_title"
+                                                value="{{ $getFAQ->seo_title }}">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Seo Descriptiion</label>
+                                            <input type="text" class="form-control" name="seo_description"
+                                                value="{{ $getFAQ->seo_description }}">
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label"></label>

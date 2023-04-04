@@ -1,6 +1,6 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
-    <div class="page-top" style="background-image: url({{ asset('upload/terms/' . $getTerm->image) }})">
+    <div class="page-top" style="background-image: url({{ asset('upload/' . $getTerm->image) }})">
         <div class="bg"></div>
         <div class="container">
             <div class="row">

@@ -18,7 +18,7 @@ class Company
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::guard('company')->check()) {
-            return view('frontend.pages.login');
+            return redirect()->to('login');
         }
         return $next($request);
     }

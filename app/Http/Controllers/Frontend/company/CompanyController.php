@@ -18,6 +18,7 @@ use App\Models\JobLocation;
 use App\Models\Jobs;
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\PageCompany;
 use App\Models\Salary;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Intervention\Image\ImageManagerStatic as Image;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class CompanyController extends Controller
 {
@@ -323,16 +325,20 @@ class CompanyController extends Controller
 
         $getOrder = Order::where('company_id', $companyId)
             ->where('currently_active', 1)->first();
-        $getPackage = Package::where('id', $getOrder->package_id)->first();
-        $existingJob = Jobs::where('company_id', $companyId)->count();
 
-        if ($getPackage->total_allowed_featured_jobs == $existingJob) {
-            $notification = array(
-                'message' => 'Maximum number of allowed jobs. So you have to upgrade your package if you want upload more job.',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+        if (isset($getOrder)) {
+            $getPackage = Package::where('id', $getOrder->package_id)->first();
+            $existingJob = Jobs::where('company_id', $companyId)->count();
+
+            if ($getPackage->total_allowed_featured_jobs == $existingJob) {
+                $notification = array(
+                    'message' => 'Maximum number of allowed jobs. So you have to upgrade your package if you want upload more job.',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            }
         }
+
         $jobLocation = JobLocation::orderBy('name', 'asc')->get();
         $jobCategory = Category::orderBy('name', 'asc')->get();
         $jobType = Type::orderBy('name', 'asc')->get();
@@ -359,16 +365,19 @@ class CompanyController extends Controller
 
         $getOrder = Order::where('company_id', $companyId)
             ->where('currently_active', 1)->first();
-        $getPackage = Package::where('id', $getOrder->package_id)->first();
-        $existingVideo = Jobs::where('company_id', $companyId)->count();
+        if (isset($getOrder)) {
+            $getPackage = Package::where('id', $getOrder->package_id)->first();
+            $existingVideo = Jobs::where('company_id', $companyId)->count();
 
-        if ($getPackage->total_allowed_featured_jobs == $existingVideo) {
-            $notification = array(
-                'message' => 'Maximum number of allowed job. So you have to upgrade your package if you want upload more job.',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+            if ($getPackage->total_allowed_featured_jobs == $existingVideo) {
+                $notification = array(
+                    'message' => 'Maximum number of allowed job. So you have to upgrade your package if you want upload more job.',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            }
         }
+
 
         $request->validate([
             "title" => ['required', 'max:255'],
@@ -421,7 +430,7 @@ class CompanyController extends Controller
 
     public function jobs()
     {
-        $listJobs = Jobs::with('category')->latest()->get();
+        $listJobs = Jobs::where('company_id', Auth::guard('company')->user()->id)->latest()->get();
         return view('frontend.pages.company.company_all_jobs', compact('listJobs'));
     }
 
@@ -511,6 +520,8 @@ class CompanyController extends Controller
 
     public function companies(Request $request)
     {
+        $getPage = PageCompany::first();
+
         $companyLocation = CompanyLocation::all();
         $companyIndustry = CompanyIndustry::all();
         $companySize = CompanySize::all();
@@ -548,6 +559,8 @@ class CompanyController extends Controller
 
         $getCompanies = $getCompanies->paginate(6)->appends($request->all());
 
+        $this->generateSEO($request, $getPage);
+
         return view(
             'frontend.pages.companies',
             compact(
@@ -560,10 +573,26 @@ class CompanyController extends Controller
                 'size',
                 'industry',
                 'founded',
-                'getCompanies'
+                'getCompanies',
+                'getPage'
             )
         );
     }
+
+    public function generateSEO($request, $getPage)
+    {
+        $url = $request->url();
+        $img = url('upload/' . $getPage->seo_image);
+
+        SEOTools::setTitle($getPage->seo_title);
+        SEOTools::setDescription($getPage->seo_description);
+        SEOTools::opengraph()->setUrl($url);
+        SEOTools::setCanonical($url);
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@FindJob');
+        SEOTools::jsonLd()->addImage($img);
+    }
+
     public function companyDetail($slug)
     {
         $getCompany = Company::with(

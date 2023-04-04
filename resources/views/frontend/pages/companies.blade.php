@@ -1,11 +1,11 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
-    <div class="page-top" style="background-image: url('{{ asset('upload/banner10.jpg') }}')">
+    <div class="page-top" style="background-image: url('{{ asset('upload/' . $getPage->image) }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Company Listing</h2>
+                    <h2>{{ $getPage->title }}</h2>
                 </div>
             </div>
         </div>
@@ -60,7 +60,8 @@
                                 <h2>Founded On</h2>
                                 <select name="founded" class="form-control select2">
                                     @foreach ($companyFounded as $item)
-                                        <option @if ($item->id == $founded) selected @endif value={{ $item->id }}>
+                                        <option @if ($item->id == $founded) selected @endif
+                                            value={{ $item->id }}>
                                             {{ $item->name }}</option>
                                     @endforeach
                                 </select>

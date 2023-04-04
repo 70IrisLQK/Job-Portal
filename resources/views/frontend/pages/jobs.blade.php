@@ -1,11 +1,11 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
-    <div class="page-top" style="background-image: url('{{ asset('upload/banner.jpg') }}')">
+    <div class="page-top" style="background-image: url('{{ asset('upload/' . $getPage->image) }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Job Listing</h2>
+                    <h2>{{ $getPage->title }}</h2>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="filter-button">
-                                <button type="submit" class="btn btn-primary btn-sm">
+                                <button type="submit" class="btn btn-success btn-sm">
                                     <i class="fas fa-search"></i> Filter
                                 </button>
                             </div>
@@ -148,7 +148,7 @@
                                                         <div class="budget">
                                                             {{ $job->salary->name }}
                                                         </div>
-                                                        @if (date('Y-m-d') <= $job->deadline)
+                                                        @if (date('Y-m-d') > $job->deadline)
                                                             <div class="expired">
                                                                 Expired
                                                             </div>

@@ -15,7 +15,7 @@
             <div class="row">
                 @include('frontend.pages.candidate.candidate_sidebar')
                 <div class="col-lg-9 col-md-12">
-                    <a href="{{ route('award.index') }}}" class="btn btn-primary btn-sm mb-2"><i class="fas fa-plus"></i>
+                    <a href="{{ route('award.index') }}" class="btn btn-primary btn-sm mb-2"><i class="fas fa-plus"></i>
                         See
                         All</a>
                     <form action="{{ route('award.update', [$getAward->id]) }}" method="post">

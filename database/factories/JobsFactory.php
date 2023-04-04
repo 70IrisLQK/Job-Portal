@@ -9,6 +9,7 @@ use App\Models\Gender;
 use App\Models\JobLocation;
 use App\Models\Salary;
 use App\Models\Type;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -40,7 +41,7 @@ class JobsFactory extends Factory
             'skill' => $post,
             'education' => $post,
             'benefit' => $post,
-            'vacancy' => fake()->numberBetween(1, 10),
+            'vacancy' => fake()->numberBetween(1, 15),
             'job_category_id' => Category::all()->random()->id,
             'job_location_id' => JobLocation::all()->random()->id,
             'job_type_id' => Type::all()->random()->id,
@@ -51,7 +52,7 @@ class JobsFactory extends Factory
             'is_featured' => fake()->randomElement([0, 1]),
             'is_urgent' => fake()->randomElement([0, 1]),
             'status' => fake()->randomElement([0, 1]),
-            'deadline' => fake()->dateTimeThisMonth(),
+            'deadline' => Carbon::createFromTimeStamp(fake()->dateTimeBetween('-30 days', '+30 days')->getTimestamp()),
         ];
     }
 }

@@ -13,13 +13,21 @@ use App\Models\CandidateSkill;
 use App\Models\CandidateWorkExperience;
 use App\Models\Jobs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class CompanyApplicationController extends Controller
 {
     public function index()
     {
-        $listJobApply = CandidateApply::with('candidate')->get();
+        $listJobApply = [];
+
+        $getJob = Jobs::where('company_id', Auth::guard('company')->user()->id)->first();
+
+        if (isset($getJob)) {
+            $listJobApply = CandidateApply::with('candidate')->where('job_id', $getJob->id)->get();
+        }
+
         return view('frontend.pages.company.company_applications_list', compact('listJobApply'));
     }
 

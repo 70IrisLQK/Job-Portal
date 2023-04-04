@@ -5,7 +5,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Dashboard</h2>
+                    <h2>
+                        Experience List</h2>
                 </div>
             </div>
         </div>
@@ -18,43 +19,51 @@
                     <a href="{{ route('experience.create') }}" class="btn btn-primary btn-sm mb-2"><i
                             class="fas fa-plus"></i>
                         Add Item</a>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th>SL</th>
-                                    <th>Company</th>
-                                    <th>Designation</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                @foreach ($listExperience as $experience)
+                    @if (!$listExperience->count())
+                        <div>
+                            <span class="text-danger">No result data found</span>
+                        </div>
+                    @else
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $experience->company }}</td>
-                                        <td>{{ $experience->description }}</td>
-                                        <td>{{ $experience->start_date }}</td>
-                                        <td>{{ $experience->end_date }}</td>
-                                        <td class="d-flex">
-                                            <a href="{{ route('experience.edit', [$experience->id]) }}"
-                                                class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('experience.destroy', [$experience->id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#" class="btn btn-danger btn-sm"
-                                                    onClick="event.preventDefault(); this.closest('form').submit();return confirm('Do you want to delete it')"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                            </form>
-                                        </td>
+                                        <th>SL</th>
+                                        <th>Company</th>
+                                        <th>Designation</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
+                                    @foreach ($listExperience as $experience)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $experience->company }}</td>
+                                            <td>{{ $experience->description }}</td>
+                                            <td>{{ $experience->start_date }}</td>
+                                            <td>{{ $experience->end_date }}</td>
+                                            <td class="d-flex">
+                                                <a href="{{ route('experience.edit', [$experience->id]) }}"
+                                                    class="btn btn-warning btn-sm text-white"><i
+                                                        class="fas fa-edit"></i></a>
+                                                <form action="{{ route('experience.destroy', [$experience->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#" class="btn btn-danger btn-sm"
+                                                        onClick="event.preventDefault(); this.closest('form').submit();return confirm('Do you want to delete it')"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
 
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>

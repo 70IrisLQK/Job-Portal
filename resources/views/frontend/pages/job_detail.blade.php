@@ -1,7 +1,7 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
     <div class="page-top page-top-job-single"
-        style="background-image: url('{{ asset('upload/homepages/264b207e-1d1d-44fb-86fc-a24940809001.jpg') }}')">
+        style="background-image: url('{{ asset('upload/companies/' . $getJob->company->banner) }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
@@ -19,6 +19,7 @@
                             <div class="detail-2 d-flex justify-content-start">
                                 <div class="date">{{ $getJob->created_at->diffForHumans() }}</div>
                                 <div class="budget">{{ $getJob->salary->name }}</div>
+
                                 @if (date('Y-m-d') > $getJob->deadline)
                                     <div class="expired">
                                         Expired
@@ -43,29 +44,13 @@
                             @if (!Auth::guard('company')->user())
                                 <div class="apply">
                                     @if (date('Y-m-d') <= $getJob->deadline)
-                                        <a href="{{ route('candidate.apply', [$getJob->id]) }}"
+                                        <a href="{{ route('candidate.apply', [$getJob->slug]) }}"
                                             class="btn btn-primary">Apply Now</a>
                                     @endif
-                                    <div class="bookmark">
-                                        @if (Auth::guard('candidate')->check())
-                                            @php
-                                                $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)
-                                                    ->where('job_id', $getJob->id)
-                                                    ->count();
-                                                if ($count > 0) {
-                                                    $bookmarkStatus = 'active';
-                                                } else {
-                                                    $bookmarkStatus = '';
-                                                }
-                                            @endphp
-                                        @else
-                                            @php
-                                                $bookmarkStatus = '';
-                                            @endphp
-                                        @endif
-                                        <a href="{{ route('candidate.bookmark', [$getJob->id]) }}"><i
-                                                class="fas fa-bookmark {{ $bookmarkStatus }}"></i></a>
-                                    </div>
+
+                                    <a class="btn btn-primary save-job"
+                                        href="{{ route('candidate.bookmark', [$getJob->id]) }}">Bookmark</a>
+
                                 </div>
                             @endif
                         </div>
@@ -120,10 +105,11 @@
                     </div>
 
                     <div class="left-item">
-                        @if (date('Y-m-d') > $getJob->deadline)
-                            <div class="apply">
-                                <a href="apply.html" class="btn btn-primary">Apply Now</a>
-                            </div>
+                        @if (!Auth::guard('company')->check())
+                            @if (date('Y-m-d') <= $getJob->deadline)
+                                <a href="{{ route('candidate.apply', [$getJob->slug]) }}" class="btn btn-primary">Apply
+                                    Now</a>
+                            @endif
                         @endif
                     </div>
 
@@ -140,12 +126,12 @@
                                             <div class="item d-flex justify-content-start">
                                                 <div class="logo">
                                                     <img src="{{ asset('upload/companies/' . $job->company->logo) }}"
-                                                        alt="{{ $job->name }}" />
+                                                        alt="{{ $job->title }}" />
                                                 </div>
                                                 <div class="text">
                                                     <h3>
                                                         <a
-                                                            href="{{ route('jobs.detail', [$job->slug]) }}">{{ $job->name }}</a>
+                                                            href="{{ route('jobs.detail', [$job->slug]) }}">{{ $job->title }}</a>
                                                     </h3>
                                                     <div class="detail-1 d-flex justify-content-start">
                                                         <div class="category">
@@ -159,7 +145,7 @@
                                                         <div class="date">{{ $job->created_at->diffForHumans() }}
                                                         </div>
                                                         <div class="budget">{{ $job->salary->name }}</div>
-                                                        @if (date('Y-m-d') <= $job->deadline)
+                                                        @if (date('Y-m-d') > $job->deadline)
                                                             <div class="expired">
                                                                 Expired
                                                             </div>
@@ -180,9 +166,28 @@
                                                             </div>
                                                         @endif
                                                     </div>
-                                                    <div class="bookmark">
-                                                        <a href=""><i class="fas fa-bookmark active"></i></a>
-                                                    </div>
+                                                    @if (Auth::guard('candidate')->check())
+                                                        @php
+                                                            $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)
+                                                                ->where('job_id', $job->id)
+                                                                ->count();
+                                                            if ($count > 0) {
+                                                                $bookmarkStatus = 'active';
+                                                            } else {
+                                                                $bookmarkStatus = '';
+                                                            }
+                                                        @endphp
+                                                    @else
+                                                        @php
+                                                            $bookmarkStatus = '';
+                                                        @endphp
+                                                    @endif
+                                                    @if (Auth::guard('candidate')->check())
+                                                        <div class="bookmark">
+                                                            <a href="{{ route('candidate.bookmark', [$job->id]) }}"><i
+                                                                    class="fas fa-bookmark {{ $bookmarkStatus }}"></i></a>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

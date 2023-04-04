@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('token')->nullable();
             $table->string('logo')->nullable();
+            $table->string('banner')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('company_location_id')->nullable();
@@ -41,7 +42,7 @@ return new class extends Migration
             $table->text('map_code')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
-            $table->string('linked')->nullable();
+            $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->softDeletes();

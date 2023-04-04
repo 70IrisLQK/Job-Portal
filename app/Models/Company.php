@@ -44,6 +44,7 @@ class Company extends Authenticatable
         'phone',
         'address',
         'website',
+        'banner',
         'company_location_id',
         'company_size_id',
         'company_founded_id',

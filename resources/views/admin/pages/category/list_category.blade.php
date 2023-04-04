@@ -15,7 +15,6 @@
                                         <tr>
                                             <th>STT</th>
                                             <th>Name</th>
-                                            <th>Slug</th>
                                             <th>Icon</th>
                                             <th>Description</th>
                                             <th>View Detail</th>
@@ -27,7 +26,6 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $category->name }}</td>
-                                                <td>{{ $category->slug }}</td>
                                                 <td><i class="{{ $category->icon }}" style="font-size: 30px"></i></td>
                                                 <td>{{ Str::limit($category->description, 50, '...') }}</td>
                                                 <td>

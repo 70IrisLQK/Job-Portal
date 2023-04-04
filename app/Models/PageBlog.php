@@ -13,5 +13,12 @@ class PageBlog extends Model
     protected $table = 'page_blogs';
     protected $guard = [];
     protected $timestamp = false;
-    protected $fillable = ['title', 'description', 'image', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'title',
+        'image',
+        'seo_title',
+        'seo_description',
+        'created_at',
+        'updated_at'
+    ];
 }

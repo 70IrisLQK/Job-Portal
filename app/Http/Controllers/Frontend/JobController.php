@@ -9,15 +9,19 @@ use App\Models\Experience;
 use App\Models\Gender;
 use App\Models\JobLocation;
 use App\Models\Jobs;
+use App\Models\PageJob;
 use App\Models\Salary;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class JobController extends Controller
 {
     public function jobs(Request $request)
     {
+        $getPage = PageJob::first();
+
         $getCategory = Category::all();
         $getJobLocation = JobLocation::all();
         $getType = Type::all();
@@ -67,6 +71,9 @@ class JobController extends Controller
         }
 
         $getJobs = $getJobs->paginate(6)->appends($request->all());
+
+        $this->generateSEO($request, $getPage);
+
         return view('frontend.pages.jobs', compact(
             'getJobs',
             'getCategory',
@@ -82,6 +89,7 @@ class JobController extends Controller
             'experience',
             'gender',
             'salary',
+            'getPage'
         ));
     }
 
@@ -134,5 +142,19 @@ class JobController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function generateSEO($request, $getPage)
+    {
+        $url = $request->url();
+        $img = url('upload/' . $getPage->seo_image);
+
+        SEOTools::setTitle($getPage->seo_title);
+        SEOTools::setDescription($getPage->seo_description);
+        SEOTools::opengraph()->setUrl($url);
+        SEOTools::setCanonical($url);
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@FindJob');
+        SEOTools::jsonLd()->addImage($img);
     }
 }

@@ -11,8 +11,10 @@ class CandidateEducation extends Model
     protected $guard = [];
     protected $timestamp = false;
     protected $fillable = [
-        'skill_name',
-        'percentage',
+        'level',
+        'institute',
+        'degree',
+        'passing_year',
         'candidate_id',
         'created_at', 'updated_at'
     ];

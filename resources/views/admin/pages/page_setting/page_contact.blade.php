@@ -26,20 +26,24 @@
                                             <textarea class="form-control" placeholder="Leave a map embed here" id="floatingTextarea2" style="height: 100px"
                                                 name="map_code">{{ $getContact->map_code }}</textarea>
                                         </div>
-
-                                        <div class="mb-4">
-                                            <label class="form-label">Description *</label>
-                                            <textarea class="form-control" placeholder="Leave a description here" id="floatingTextarea2" style="height: 100px"
-                                                name="description">{{ $getContact->description }}</textarea>
-                                        </div>
                                         <div class="mb-4">
                                             <label class="form-label">Contact Background *</label>
                                             <input type="file" class="form-control mt_10" name="image" id="image">
                                         </div>
                                         <div class="col-3">
-                                            <img src="{{ asset('upload/contacts/' . $getContact->image) }}" alt=""
+                                            <img src="{{ asset('upload/' . $getContact->image) }}" alt=""
                                                 class="profile-photo w_100_p" id="show_image">
                                             <label class="form-label"></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Seo Title</label>
+                                            <input type="text" class="form-control" name="seo_title"
+                                                value="{{ $getContact->seo_title }}">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Seo Descriptiion</label>
+                                            <input type="text" class="form-control" name="seo_description"
+                                                value="{{ $getContact->seo_description }}">
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label"></label>

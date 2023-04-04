@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\company\CompanyController;
@@ -53,6 +52,7 @@ Route::get('/privacy', [PrivacyController::class, 'index']);
 
 // Route privacy
 Route::get('/contacts', [ContactController::class, 'index']);
+Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
 
 // Route pricing
 Route::get('/pricing', [PricingController::class, 'index']);

@@ -15,7 +15,13 @@ class PageFAQSeeder extends Seeder
      */
     public function run()
     {
-        $pageFAQ = ['title' => 'FAQ', 'description' => 'FAQ', 'image' => 'no_image.jpg'];
+        $pageFAQ = [
+            'title' => 'FAQ',
+            'image' => 'banner5.jpg',
+            'seo_title' => 'Jobs in Ho Chi Minh & Ha Noi | FindJob',
+            'seo_description' => '1000 top IT jobs for you in Ho Chi Minh | Ha Noi | Da Nang on FindJob.com. Leading companies, high salary. Get your new job now!',
+            'seo_image' => 'seo_image.png',
+        ];
 
         PageFAQ::updateOrCreate($pageFAQ);
     }

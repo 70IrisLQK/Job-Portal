@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Payment</h2>
+                    <h2>Add New Job</h2>
                 </div>
             </div>
         </div>

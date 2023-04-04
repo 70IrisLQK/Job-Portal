@@ -15,43 +15,52 @@ class CompanyRegisterController extends Controller
 {
     public function companyRegister(Request $request)
     {
-        $request->validate([
-            "company_name" => ['required', 'max:255'],
-            "person_name" => ['required', 'max:255'],
-            "username" => ['required', 'max:255', 'unique:companies'],
-            "email" => ['required', 'max:255', 'email', 'unique:companies'],
-            "password" => ['required', 'max:255', 'min:6'],
-            "confirm_password" => ['required', 'max:255', 'same:password', 'min:6'],
-        ]);
+        try {
+            $request->validate([
+                "company_name" => ['required', 'max:255'],
+                "person_name" => ['required', 'max:255'],
+                "username" => ['required', 'max:255', 'unique:companies'],
+                "email" => ['required', 'max:255', 'email', 'unique:companies'],
+                "password" => ['required', 'max:255', 'min:6'],
+                "confirm_password" => ['required', 'max:255', 'same:password', 'min:6'],
+            ]);
 
-        $token = Str::random(10);
-        $slug = Str::slug($request->company_name);
+            $token = Str::random(10);
+            $slug = Str::slug($request->company_name);
 
-        Company::updateOrCreate(['slug', $slug], [
-            "company_name" => $request->company_name,
-            "slug" => $slug,
-            "person_name" => $request->person_name,
-            "username" => $request->username,
-            "email" => $request->email,
-            'token' => $token,
-            "password" => Hash::make($request->password),
-            'created_at' => Carbon::now()
-        ]);
+            Company::create([
+                "company_name" => $request->company_name,
+                'slug' => $slug,
+                "person_name" => $request->person_name,
+                "username" => $request->username,
+                "email" => $request->email,
+                'token' => $token,
+                "password" => Hash::make($request->password),
+                'created_at' => Carbon::now()
+            ]);
 
-        $resetLink = url('company/verify-account/' . $token . '/' . $request->email);
-        $subject = 'Company Verify Account';
-        $message = 'Please click on the following link: <br>';
-        $message .= '<a href="' . $resetLink . '">Click here</a>';
+            $resetLink = url('company/verify-account/' . $token . '/' . $request->email);
+            $subject = 'Company Verify Account';
+            $message = 'Please click on the following link: <br>';
+            $message .= '<a href="' . $resetLink . '">Click here</a>';
 
-        Mail::to($request->email)->send(new WebsiteEmail($subject, $message));
+            Mail::to($request->email)->send(new WebsiteEmail($subject, $message));
 
-        $notification = [
-            'message' => 'An email sent to your email.
-            You must have to check and click on the confirm link to verify account',
-            'alert-type' => 'success',
-        ];
+            $notification = [
+                'message' => 'An email sent to your email.
+                You must have to check and click on the confirm link to verify account',
+                'alert-type' => 'success',
+            ];
 
-        return redirect('login')->with($notification);
+            return redirect('login')->with($notification);
+        } catch (\Throwable $th) {
+            $notification = [
+                'message' => 'Error. Please try again.',
+                'alert-type' => 'error',
+            ];
+
+            return redirect('login')->with($notification);
+        }
     }
 
     public function verifyAccount($token, $email)

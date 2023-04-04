@@ -28,7 +28,7 @@ class CandidateController extends Controller
     public function updateProfile(Request $request, $id)
     {
         $request->validate([
-            "image" => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2000'],
+            "image" => ['image', 'mimes:png,jpg,jpeg', 'max:2000'],
             "name" => ['required', 'max:255'],
             "description" => ['required', 'max:255'],
             "biography" => ['required'],
@@ -54,7 +54,7 @@ class CandidateController extends Controller
             Image::make($image)->resize(300, 300)->save($path . $pathName);
 
             $imageExist = $getCandidate->image;
-            if (file_exists($path  . $imageExist)) {
+            if (isset($imageExist) && file_exists($path  . $imageExist)) {
                 unlink($path . $imageExist);
             }
         }
@@ -165,13 +165,12 @@ class CandidateController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function apply($id)
+    public function apply($slug)
     {
         $candidateId = Auth::guard('candidate')->user()->id;
-
+        $getJob = Jobs::where('slug', $slug)->first();
         $existingBookmark = CandidateApply::where('candidate_id', $candidateId)
-            ->where('job_id', $id)->count();
-
+            ->where('job_id', $getJob->id)->count();
         if ($existingBookmark > 0) {
             $notification = [
                 'message' => 'You have already apply on this job.',
@@ -181,25 +180,25 @@ class CandidateController extends Controller
             return redirect()->back()->with($notification);
         }
 
-        $getJob = Jobs::find($id);
-        $jobId = $id;
+
+        $jobId = $getJob->id;
 
         return view('frontend.pages.apply', compact('jobId', 'getJob'));
     }
 
-    public function applyStore(Request $request, $id)
+    public function applyStore(Request $request, $slug)
     {
+        $getJob = Jobs::with('company')->where('slug', $slug)->first();
         CandidateApply::create([
             'candidate_id' => Auth::guard('candidate')->user()->id,
-            'job_id' => $id,
+            'job_id' => $getJob->id,
             'status' => 'Applied',
             'cover_letter' => $request->cover_letter,
         ]);
 
-        $getJob = Jobs::with('company')->find($id);
         $companyEmail = $getJob->company->email;
         // Send link
-        $resetLink = route('company.application', $id);
+        $resetLink = route('company.application', $getJob->company->id);
 
         $subject = 'A person applied for this job';
         $message = 'Please check the application: <br>';

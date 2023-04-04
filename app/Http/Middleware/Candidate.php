@@ -18,7 +18,7 @@ class Candidate
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::guard('candidate')->check()) {
-            return redirect('/login');
+            return redirect()->to('/login');
         }
         return $next($request);
     }
