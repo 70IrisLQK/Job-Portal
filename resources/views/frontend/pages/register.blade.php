@@ -32,12 +32,13 @@
                                 </button>
                             </li>
                         </ul>
+                        @include('frontend.components.display_error')
+
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab" tabindex="0">
                                 <form action="{{ route('candidate.register') }}" method="post">
                                     @csrf
-                                    @include('frontend.components.display_error')
                                     <div class="mb-3">
                                         <label for="" class="form-label">Candidate Name *</label>
                                         <input type="text" class="form-control" name="name"

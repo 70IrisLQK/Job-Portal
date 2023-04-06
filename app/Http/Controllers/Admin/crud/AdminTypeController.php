@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jobs;
 use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,6 +119,16 @@ class AdminTypeController extends Controller
      */
     public function destroy($id)
     {
+        $check = Jobs::where('job_type_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted Type Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
         Type::destroy($id);
 
         $notification = array(

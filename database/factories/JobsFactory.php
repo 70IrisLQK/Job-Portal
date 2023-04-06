@@ -26,7 +26,7 @@ class JobsFactory extends Factory
     public function definition()
     {
         $paragraphs = $this->faker->paragraphs(rand(2, 6));
-        $title = $this->faker->unique()->realText(50);
+        $title = fake()->unique()->sentence(8);
         $post = "<h1>{$title}</h1>";
         foreach ($paragraphs as $para) {
             $post .= "<p>{$para}</p>";

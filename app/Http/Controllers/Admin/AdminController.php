@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\WebsiteEmail;
 use App\Models\Admin;
+use App\Models\Candidate;
+use App\Models\Category;
+use App\Models\Company;
+use App\Models\Jobs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +23,11 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.pages.admin_dashboard');
+        $listJob = Jobs::get()->count();
+        $listCompany = Company::get()->count();
+        $listCandidate = Candidate::get()->count();
+
+        return view('admin.pages.admin_dashboard', compact('listJob', 'listCompany', 'listCandidate'));
     }
 
     public function adminLogin()

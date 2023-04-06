@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jobs;
 use App\Models\Salary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,6 +119,17 @@ class AdminSalaryController extends Controller
      */
     public function destroy($id)
     {
+        $check = Jobs::where('job_salary_range_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted Salary Range Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
         Salary::destroy($id);
 
         $notification = array(

@@ -22,7 +22,7 @@ class HomeController extends Controller
         $listWhyChoose = WhyChoose::take(3)->latest('id')->get();
         $listTestimonials = Testimonial::take(2)->latest('id')->get();
         $listPosts = Post::take(3)->latest('id')->get();
-        $listLocation = JobLocation::latest('id')->get();
+        $listLocation = JobLocation::orderBy('name', 'asc')->get();
 
         $featuredJobs = Jobs::where('is_featured', 1)->latest('id')->take(6)->get();
 

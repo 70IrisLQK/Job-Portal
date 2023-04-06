@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\company;
 
 use App\Http\Controllers\Controller;
 use App\Mail\WebsiteEmail;
+use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\CompanyFounded;
@@ -33,6 +34,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 class CompanyController extends Controller
 {
     public const PUBLIC_PATH = 'upload/companies/';
+    public const PUBLIC_PATH_BANNER = 'upload/';
 
     public function editProfile()
     {
@@ -75,6 +77,7 @@ class CompanyController extends Controller
             'linkedin' => ['max:255', 'url'],
             'instagram' => ['max:255', 'url'],
             'logo' => ['image', 'mimes:png,jpeg,jpg', 'max:2000'],
+            'background' => ['image', 'mimes:png,jpeg,jpg', 'max:2000'],
         ]);
         $getCompany = Company::findOrFail($id);
 
@@ -86,13 +89,27 @@ class CompanyController extends Controller
             Image::make($image)->resize(512, 512)->save($path . $pathName);
 
             $imageExist = $getCompany->logo;
-            if (file_exists($path  . $imageExist)) {
+            if (isset($imageExist) && file_exists($path  . $imageExist)) {
+                unlink($path . $imageExist);
+            }
+        }
+
+        $pathNameBackground = $getCompany->banner;
+        if ($request->hasFile('background')) {
+            $image = $request->file('background');
+            $pathNameBackground = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $path = public_path(CompanyController::PUBLIC_PATH_BANNER);
+            Image::make($image)->resize(1300, 816)->save($path . $pathNameBackground);
+
+            $imageExist = $getCompany->banner;
+            if (isset($imageExist) && file_exists($path  . $imageExist)) {
                 unlink($path . $imageExist);
             }
         }
 
         Company::updateOrCreate(['id' => $id], [
             "logo" => $pathName,
+            "banner" => $pathNameBackground,
             "company_name" => $request->company_name,
             "person_name" => $request->contact_person,
             "email" => $request->email,
@@ -500,7 +517,7 @@ class CompanyController extends Controller
         );
 
         $notification = [
-            'message' => 'Create Job Successfully.',
+            'message' => 'Update Job Successfully.',
             'alert-type' => 'success'
         ];
 
@@ -520,12 +537,14 @@ class CompanyController extends Controller
 
     public function companies(Request $request)
     {
+        $getAdvertisement = Advertisement::where('company_listing_ad_status', 1)->first();
+
         $getPage = PageCompany::first();
 
-        $companyLocation = CompanyLocation::all();
-        $companyIndustry = CompanyIndustry::all();
-        $companySize = CompanySize::all();
-        $companyFounded = CompanyFounded::all();
+        $companyLocation = CompanyLocation::latest('id')->get();
+        $companyIndustry = CompanyIndustry::latest('id')->get();
+        $companySize = CompanySize::latest('id')->get();
+        $companyFounded = CompanyFounded::latest('id')->get();
 
         $name = $request->name;
         $location = $request->location;
@@ -574,7 +593,8 @@ class CompanyController extends Controller
                 'industry',
                 'founded',
                 'getCompanies',
-                'getPage'
+                'getPage',
+                'getAdvertisement'
             )
         );
     }
@@ -604,6 +624,13 @@ class CompanyController extends Controller
         )->withCount('jobs')
             ->where('slug', $slug)
             ->first();
+
+        $orderData = Order::where('company_id', $getCompany->id)
+            ->where('currently_active', 1)->first();
+
+        if (isset($orderData) && date('Y-m-d') > $orderData->expire_date) {
+            return redirect()->to('/');
+        }
 
         $companyPhoto = CompanyPhoto::where('company_id', $getCompany->id)->get();
         $companyVideo = CompanyVideo::where('company_id', $getCompany->id)->get();

@@ -39,6 +39,7 @@ class Company extends Authenticatable
         'username',
         'email',
         'password',
+        'slug',
         'token',
         'logo',
         'phone',
@@ -63,6 +64,7 @@ class Company extends Authenticatable
         'linkedin',
         'instagram',
         'status',
+        'background',
         'created_at', 'updated_at'
     ];
 

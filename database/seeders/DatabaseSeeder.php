@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             JobSeeder::class,
             FAQSeeder::class,
             AdvertisementSeeder::class,
+            CandidateSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

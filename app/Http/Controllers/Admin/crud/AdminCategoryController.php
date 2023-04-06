@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Jobs;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -128,6 +129,17 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $check = Jobs::where('job_category_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted Category Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
         Category::destroy($id);
 
         $notification = array(

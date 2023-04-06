@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Candidate;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class CandidateSeeder extends Seeder
 {
@@ -14,6 +15,15 @@ class CandidateSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $admin = [
+            'name' => 'Candidate',
+            'username' => 'candidate',
+            'email' => 'candidate@gmail.com',
+            'image' => 'user.jpg',
+            'password' => Hash::make('123456'),
+            'status' => 1
+        ];
+
+        Candidate::updateOrCreate($admin);
     }
 }

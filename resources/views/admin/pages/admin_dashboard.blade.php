@@ -8,14 +8,14 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
-                        <i class="far fa-user"></i>
+                        <i class="fas fa-book-open"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total News Categories</h4>
+                            <h4>Total Jobs</h4>
                         </div>
                         <div class="card-body">
-                            12
+                            {{ $listJob }}
                         </div>
                     </div>
                 </div>
@@ -23,14 +23,14 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total News</h4>
+                            <h4>Total Candidate</h4>
                         </div>
                         <div class="card-body">
-                            122
+                            {{ $listCandidate }}
                         </div>
                     </div>
                 </div>
@@ -42,10 +42,10 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Users</h4>
+                            <h4>Total Comoany</h4>
                         </div>
                         <div class="card-body">
-                            45
+                            {{ $listCompany }}
                         </div>
                     </div>
                 </div>

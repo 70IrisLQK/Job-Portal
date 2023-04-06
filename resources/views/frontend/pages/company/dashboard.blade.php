@@ -36,42 +36,48 @@
                     </div>
 
                     <h3 class="mt-5">Recent Jobs</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th>SL</th>
-                                    <th>Job Title</th>
-                                    <th>Category</th>
-                                    <th>Featured</th>
-                                    <th>Urgent</th>
-                                </tr>
-                                @foreach ($getJobs as $job)
+                    @if (!$getJobs->count())
+                        <span class="text-danger">
+                            No rencent job.
+                        </span>
+                    @else
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $job->title }}</td>
-                                        <td>{{ $job->category->name }}</td>
-                                        <td>
-                                            @if ($job->is_featured == 1)
-                                                <span class="badge bg-success">Featured</span>
-                                            @else
-                                                <span class="badge bg-danger">Not Featured</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($job->is_urgent == 1)
-                                                <span class="badge bg-success">Featured</span>
-                                            @else
-                                                <span class="badge bg-danger">Not Featured</span>
-                                            @endif
-                                        </td>
-
+                                        <th>SL</th>
+                                        <th>Job Title</th>
+                                        <th>Category</th>
+                                        <th>Featured</th>
+                                        <th>Urgent</th>
                                     </tr>
-                                @endforeach
+                                    @foreach ($getJobs as $job)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $job->title }}</td>
+                                            <td>{{ $job->category->name }}</td>
+                                            <td>
+                                                @if ($job->is_featured == 1)
+                                                    <span class="badge bg-success">Featured</span>
+                                                @else
+                                                    <span class="badge bg-danger">Not Featured</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($job->is_urgent == 1)
+                                                    <span class="badge bg-success">Featured</span>
+                                                @else
+                                                    <span class="badge bg-danger">Not Featured</span>
+                                                @endif
+                                            </td>
 
-                            </tbody>
-                        </table>
-                    </div>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

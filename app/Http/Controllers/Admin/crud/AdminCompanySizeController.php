@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\CompanySize;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,6 +119,17 @@ class AdminCompanySizeController extends Controller
      */
     public function destroy($id)
     {
+        $check = Company::where('company_size_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted CompanySize Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
         CompanySize::destroy($id);
 
         $notification = array(

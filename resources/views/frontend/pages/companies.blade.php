@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-12">
                     <div class="job-filter">
-                        <form method="get" action="{{ route('companies.listing') }}">
+                        <form method="get" action="{{ route('companies.listing') }}" id="form__submit">
                             <div class="widget">
                                 <h2>Company Name</h2>
                                 <input type="text" name="name" class="form-control"
@@ -26,6 +26,7 @@
                             <div class="widget">
                                 <h2>Company Location</h2>
                                 <select name="location" class="form-control select2">
+                                    <option value="">Company Location</option>
                                     @foreach ($companyLocation as $item)
                                         <option @if ($item->id == $location) selected @endif value={{ $item->id }}>
                                             {{ $item->name }}</option>
@@ -37,6 +38,8 @@
                             <div class="widget">
                                 <h2>Company Industry</h2>
                                 <select name="industry" class="form-control select2">
+                                    <option value="">Company Industry</option>
+
                                     @foreach ($companyIndustry as $item)
                                         <option @if ($item->id == $industry) selected @endif value={{ $item->id }}>
                                             {{ $item->name }}</option>
@@ -48,6 +51,8 @@
                             <div class="widget">
                                 <h2>Company Size</h2>
                                 <select name="size" class="form-control select2">
+                                    <option value="">Company Size</option>
+
                                     @foreach ($companySize as $item)
                                         <option @if ($item->id == $size) selected @endif value={{ $item->id }}>
                                             {{ $item->name }}</option>
@@ -59,6 +64,7 @@
                             <div class="widget">
                                 <h2>Founded On</h2>
                                 <select name="founded" class="form-control select2">
+                                    <option value="">Founded On</option>
                                     @foreach ($companyFounded as $item)
                                         <option @if ($item->id == $founded) selected @endif
                                             value={{ $item->id }}>
@@ -69,13 +75,16 @@
                             </div>
 
                             <div class="filter-button">
-                                <button class="btn btn-sm"><i class="fas fa-search"></i>
-                                    Filter</a>
+                                <a type="submit" class="btn  btn-sm" onclick="submitForm()">
+                                    <i class="fas fa-search"></i> Filter
+                                </a>
                             </div>
                         </form>
 
                         <div class="advertisement">
-                            <a href=""><img src="uploads/ad-2.png" alt="" /></a>
+                            <a href="https://github.com/70IrisLQK" target="_blank"><img
+                                    src="{{ asset('upload/advertisements/' . $getAdvertisement->company_listing_ad) }}"
+                                    alt="" /></a>
                         </div>
                     </div>
                 </div>

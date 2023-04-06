@@ -32,6 +32,7 @@
                                         <th>Mobile</th>
                                         <th>Current Status</th>
                                         <th>See Resume</th>
+                                        <th>Cover Letter</th>
                                         <th>Change Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -55,6 +56,12 @@
                                                     target="_blank" class="btn btn-primary btn-sm">See Resume</a>
                                             </td>
                                             <td>
+                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $job->id }}">
+                                                    Cover Letter
+                                                </button>
+                                            </td>
+                                            <td>
                                                 <div class="mb-3">
                                                     <form action="{{ route('application.change-status') }}" method="post">
                                                         @csrf
@@ -76,6 +83,25 @@
                                                     onClick="return confirm('Are you sure?');">Delete</a>
                                             </td>
                                         </tr>
+                                        <div class="modal fade" id="exampleModal{{ $job->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Cover Letter</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{ $job->cover_letter }}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
 
                                 </tbody>

@@ -32,9 +32,9 @@
                 <a href="{{ route('resume.index') }}">Resume Upload</a>
             </li>
             <li class="list-group-item">
-                <form id="form_submit" action="{{ route('candidate.logout') }}" method="post">
+                <form id="logoutSubmit" action="{{ route('candidate.logout') }}" method="post">
                     @csrf
-                    <a onclick="submitForm()" href="#">Logout</a>
+                    <a onclick="logoutSubmit()" href="#">Logout</a>
                 </form>
             </li>
         </ul>

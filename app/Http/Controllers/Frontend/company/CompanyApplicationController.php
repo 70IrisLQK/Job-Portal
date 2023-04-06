@@ -22,11 +22,9 @@ class CompanyApplicationController extends Controller
     {
         $listJobApply = [];
 
-        $getJob = Jobs::where('company_id', Auth::guard('company')->user()->id)->first();
-
-        if (isset($getJob)) {
-            $listJobApply = CandidateApply::with('candidate')->where('job_id', $getJob->id)->get();
-        }
+        $listJobApply = CandidateApply::with('candidate')
+            ->where('company_id', Auth::guard('company')->user()->id)
+            ->latest('id')->get();
 
         return view('frontend.pages.company.company_applications_list', compact('listJobApply'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
 use App\Models\Experience;
+use App\Models\Jobs;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -118,6 +119,17 @@ class AdminExperienceController extends Controller
      */
     public function destroy($id)
     {
+        $check = Jobs::where('job_experience_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted Experience Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
         Experience::destroy($id);
 
         $notification = array(

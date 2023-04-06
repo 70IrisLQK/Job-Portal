@@ -15,6 +15,7 @@ class CandidateApply extends Model
         'job_id',
         'cover_letter',
         'status',
+        'company_id',
         'created_at', 'updated_at'
     ];
 

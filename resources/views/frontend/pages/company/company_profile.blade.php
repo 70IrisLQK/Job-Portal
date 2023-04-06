@@ -223,7 +223,19 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-md-12 mb-3">
+                            <label for="">Existing Background</label>
+                            <div class="form-group">
+                                <img src="{{ asset('upload/' . $getCompany->banner) }}" alt="" class="logo"
+                                    id="show_background" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="">Change Background</label>
+                            <div class="form-group">
+                                <input type="file" name="background" id="background" />
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Update" />

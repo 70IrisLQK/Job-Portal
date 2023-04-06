@@ -192,6 +192,7 @@ class CandidateController extends Controller
         CandidateApply::create([
             'candidate_id' => Auth::guard('candidate')->user()->id,
             'job_id' => $getJob->id,
+            'company_id' => $getJob->company_id,
             'status' => 'Applied',
             'cover_letter' => $request->cover_letter,
         ]);

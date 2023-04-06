@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="job-filter">
-                        <form method="get" action="{{ route('jobs.listing') }}">
+                        <form method="get" action="{{ route('jobs.listing') }}" id="form__submit">
                             <div class="widget">
                                 <h2>Job Title</h2>
                                 <input type="text" name="title" value="{{ $title }}" class="form-control"
@@ -26,6 +26,9 @@
                             <div class="widget">
                                 <h2>Job Location</h2>
                                 <select name="job_location_id" class="form-control select2">
+                                    <option value="">
+                                        Job Location
+                                    </option>
                                     @foreach ($getJobLocation as $item)
                                         <option @if ($location == $item->id) selected @endif
                                             value="{{ $item->id }}">
@@ -38,6 +41,9 @@
                             <div class="widget">
                                 <h2>Job Category</h2>
                                 <select name="job_category_id" class="form-control select2">
+                                    <option value="">
+                                        Job Category
+                                    </option>
                                     @foreach ($getCategory as $item)
                                         <option @if ($category == $item->id) selected @endif
                                             value="{{ $item->id }}">{{ $item->name }}</option>
@@ -48,6 +54,9 @@
                             <div class="widget">
                                 <h2>Job Type</h2>
                                 <select name="job_type_id" class="form-control select2">
+                                    <option value="">
+                                        Job Type
+                                    </option>
                                     @foreach ($getType as $item)
                                         <option @if ($type == $item->id) selected @endif
                                             value="{{ $item->id }}">{{ $item->name }}</option>
@@ -58,6 +67,9 @@
                             <div class="widget">
                                 <h2>Experience</h2>
                                 <select name="job_experience_id" class="form-control select2">
+                                    <option value="">
+                                        Experience
+                                    </option>
                                     @foreach ($getExperience as $item)
                                         <option @if ($experience == $item->id) selected @endif
                                             value="{{ $item->id }}">{{ $item->name }}</option>
@@ -68,6 +80,9 @@
                             <div class="widget">
                                 <h2>Gender</h2>
                                 <select name="job_gender_id" class="form-control select2">
+                                    <option value="">
+                                        Gender
+                                    </option>
                                     @foreach ($getGender as $item)
                                         <option @if ($gender == $item->id) selected @endif
                                             value="{{ $item->id }}">{{ $item->name }}</option>
@@ -78,6 +93,9 @@
                             <div class="widget">
                                 <h2>Salary Range</h2>
                                 <select name="job_salary_id" class="form-control select2">
+                                    <option value="">
+                                        Salary Range
+                                    </option>
                                     @foreach ($getSalary as $item)
                                         <option @if ($salary == $item->id) selected @endif
                                             value="{{ $item->id }}">{{ $item->name }}</option>
@@ -86,14 +104,16 @@
                             </div>
 
                             <div class="filter-button">
-                                <button type="submit" class="btn btn-success btn-sm">
+                                <a type="submit" class="btn  btn-sm" onclick="submitForm()">
                                     <i class="fas fa-search"></i> Filter
-                                </button>
+                                </a>
                             </div>
                         </form>
 
                         <div class="advertisement">
-                            <a href=""><img src="uploads/ad-2.png" alt="" /></a>
+                            <a href="https://github.com/70IrisLQK" target="_blank"><img
+                                    src="{{ asset('upload/advertisements/' . $getAdvertisement->job_listing_ad) }}"
+                                    alt="" /></a>
                         </div>
                     </div>
                 </div>
@@ -112,15 +132,15 @@
                                     <div class="text-danger">No result data found</div>
                                 @else
                                     @foreach ($getJobs as $job)
-                                        {{-- @php
+                                        @php
                                             $companyId = $job->company->id;
                                             $orderData = \App\Models\Order::where('company_id', $companyId)
                                                 ->where('currently_active', 1)
                                                 ->first();
-                                            if (date('Y-m-d') > $orderData->expire_date) {
+                                            if (isset($orderData) && date('Y-m-d') > $orderData->expire_date) {
                                                 continue;
                                             }
-                                        @endphp --}}
+                                        @endphp
                                         <div class="col-md-12">
                                             <div class="item d-flex justify-content-start">
                                                 <div class="logo">

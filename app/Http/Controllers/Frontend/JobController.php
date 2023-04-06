@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\WebsiteEmail;
+use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\Experience;
 use App\Models\Gender;
@@ -20,14 +21,15 @@ class JobController extends Controller
 {
     public function jobs(Request $request)
     {
+        $getAdvertisement = Advertisement::where('job_listing_ad_status', 1)->first();
         $getPage = PageJob::first();
 
-        $getCategory = Category::all();
-        $getJobLocation = JobLocation::all();
-        $getType = Type::all();
-        $getExperience = Experience::all();
-        $getGender = Gender::all();
-        $getSalary = Salary::all();
+        $getCategory = Category::orderBy('name', 'asc')->get();
+        $getJobLocation = JobLocation::orderBy('name', 'asc')->get();
+        $getType = Type::orderBy('name', 'asc')->get();
+        $getExperience = Experience::orderBy('name', 'asc')->get();
+        $getGender = Gender::orderBy('name', 'asc')->get();
+        $getSalary = Salary::orderBy('name', 'asc')->get();
 
         $title = $request->title;
         $location = $request->job_location_id;
@@ -89,7 +91,8 @@ class JobController extends Controller
             'experience',
             'gender',
             'salary',
-            'getPage'
+            'getPage',
+            'getAdvertisement'
         ));
     }
 

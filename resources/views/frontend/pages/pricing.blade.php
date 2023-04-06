@@ -94,7 +94,7 @@
                                     </li>
                                 </ul>
                                 <div class="buy">
-                                    <a href="" class="btn btn-primary">
+                                    <a href="{{ url('company/payment') }}" class="btn btn-primary">
                                         Choose Plan
                                     </a>
                                 </div>

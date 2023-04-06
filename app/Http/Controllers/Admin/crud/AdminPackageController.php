@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -140,6 +141,17 @@ class AdminPackageController extends Controller
      */
     public function destroy($id)
     {
+        $check = Order::where('package_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted Package Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
         Package::destroy($id);
 
         $notification = [

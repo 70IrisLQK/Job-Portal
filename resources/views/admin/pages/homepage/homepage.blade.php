@@ -65,16 +65,7 @@
                                                     Active</option>
                                             </select>
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Seo Title</label>
-                                            <input type="text" class="form-control" name="seo_title"
-                                                value="{{ $getHomePage->seo_title }}">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Seo Description</label>
-                                            <textarea class="form-control" placeholder="Leave a seo description here" id="floatingTextarea2" style="height: 100px"
-                                                name="seo_description">{{ $getHomePage->seo_description }}</textarea>
-                                        </div>
+
                                         <div class="mb-4">
                                             <label class="form-label">Homepage Background *</label>
                                             <input type="file" class="form-control mt_10" name="image" id="image">

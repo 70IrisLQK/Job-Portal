@@ -32,9 +32,9 @@
                 <a href="{{ route('company.edit-profile') }}">Edit Profile</a>
             </li>
             <li class="list-group-item">
-                <form id="form_submit" action="{{ route('company.logout') }}" method="post">
+                <form id="companyLogout" action="{{ route('company.logout') }}" method="post">
                     @csrf
-                    <a onclick="submitForm()" href="#">Logout</a>
+                    <a onclick="companyLogout()" href="#">Logout</a>
                 </form>
             </li>
         </ul>

@@ -1,7 +1,7 @@
 @extends('frontend.frontend_master')
 @section('frontend-content')
     <div class="page-top page-top-job-single"
-        style="background-image: url('{{ asset('upload/companies/' . $getJob->company->banner) }}')">
+        style="background-image: url('{{ asset('upload/' . $getJob->company->banner) }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
@@ -105,12 +105,14 @@
                     </div>
 
                     <div class="left-item">
-                        @if (!Auth::guard('company')->check())
-                            @if (date('Y-m-d') <= $getJob->deadline)
-                                <a href="{{ route('candidate.apply', [$getJob->slug]) }}" class="btn btn-primary">Apply
-                                    Now</a>
+                        <div class="apply">
+                            @if (!Auth::guard('company')->check())
+                                @if (date('Y-m-d') <= $getJob->deadline)
+                                    <a href="{{ route('candidate.apply', [$getJob->slug]) }}" class="btn btn-primary">Apply
+                                        Now</a>
+                                @endif
                             @endif
-                        @endif
+                        </div>
                     </div>
 
                     <div class="left-item">

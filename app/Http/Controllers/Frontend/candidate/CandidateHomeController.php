@@ -16,7 +16,7 @@ class CandidateHomeController extends Controller
         $totalReject = 0;
 
         $totalApply = CandidateApply::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Applied')->count();
-        $totalApprove = CandidateApply::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Approve')->count();
+        $totalApprove = CandidateApply::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Approved')->count();
         $totalReject = CandidateApply::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Reject')->count();
 
         return view('frontend.pages.candidate.candidate_dashboard', compact(

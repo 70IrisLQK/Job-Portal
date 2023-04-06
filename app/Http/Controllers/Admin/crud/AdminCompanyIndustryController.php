@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\crud;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\CompanyIndustry;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -121,6 +122,17 @@ class AdminCompanyIndustryController extends Controller
      */
     public function destroy($id)
     {
+        $check = Company::where('company_industry_id', $id)->count();
+
+        if ($check > 0) {
+            $notification = array(
+                'message' => 'Deleted CompanyIndustry Error. Because it used in another place.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
         CompanyIndustry::destroy($id);
 
         $notification = array(

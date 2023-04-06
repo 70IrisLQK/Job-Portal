@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('candidate_id');
             $table->integer('job_id');
+            $table->integer('company_id');
             $table->text('cover_letter');
             $table->string('status')->default(0);
             $table->timestamps();

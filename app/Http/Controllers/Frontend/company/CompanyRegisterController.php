@@ -15,16 +15,15 @@ class CompanyRegisterController extends Controller
 {
     public function companyRegister(Request $request)
     {
+        $request->validate([
+            "company_name" => ['required', 'max:255'],
+            "person_name" => ['required', 'max:255'],
+            "username" => ['required', 'max:255', 'unique:companies'],
+            "email" => ['required', 'max:255', 'email', 'unique:companies'],
+            "password" => ['required', 'max:255', 'min:6'],
+            "confirm_password" => ['required', 'max:255', 'same:password', 'min:6'],
+        ]);
         try {
-            $request->validate([
-                "company_name" => ['required', 'max:255'],
-                "person_name" => ['required', 'max:255'],
-                "username" => ['required', 'max:255', 'unique:companies'],
-                "email" => ['required', 'max:255', 'email', 'unique:companies'],
-                "password" => ['required', 'max:255', 'min:6'],
-                "confirm_password" => ['required', 'max:255', 'same:password', 'min:6'],
-            ]);
-
             $token = Str::random(10);
             $slug = Str::slug($request->company_name);
 
@@ -58,7 +57,7 @@ class CompanyRegisterController extends Controller
                 'message' => 'Error. Please try again.',
                 'alert-type' => 'error',
             ];
-
+            dd($th);
             return redirect('login')->with($notification);
         }
     }
